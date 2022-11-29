@@ -1,5 +1,34 @@
 *{
-    margin: auto;
+    margin: 0;
     padding: 0;
-    background-color: aquamarine;
+    box-sizing: border-box;
+}
+header{
+    background-image: linear-gradient(to bottom, #2c2c2c, #c4c4c4, #fff);
+    height: 15rem;
+    
+}
+header nav{
+    color: #fff;
+    z-index: 1;
+}
+.header img{
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    object-fit: fill;
+}
+
+.navbar .container-fluid img{
+    width: 200px;
+    height: 100px;
+    background: none;
+}
+.navbar .container-fluid .btn-menu .nav-link{
+    margin-left: 2rem;
+    color: #fff;
+}
+.header nav .navbar-brand{
+    top: 0;
 }
