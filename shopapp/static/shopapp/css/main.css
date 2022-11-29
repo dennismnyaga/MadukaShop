@@ -32,3 +32,15 @@ header nav{
 .header nav .navbar-brand{
     top: 0;
 }
+
+.navbar .container-fluid .btn-menu .coll button{
+    color: #0000;  
+    background-color: #ffff;  
+    border-radius: 50%;
+    border-style: none;
+}
+.navbar .container-fluid .btn-menu .coll i{
+    color: #000;
+    text-align: center;
+    padding: 5px;
+}
