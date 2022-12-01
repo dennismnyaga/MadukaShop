@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['madukashop-production.up.railway.app']
 
 INSTALLED_APPS = [
     'shopapp',
+    'ShopUser',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

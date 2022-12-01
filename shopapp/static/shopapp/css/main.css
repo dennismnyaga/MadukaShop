@@ -67,6 +67,10 @@ header nav{
     border-radius: 0;
 }
 
+.searcher .row .col .form-control:focus{
+    box-shadow: none !important;
+}
+
 .searcher .row .col .st{
     border-right-style: solid;
 }

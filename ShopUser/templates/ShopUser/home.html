@@ -1,0 +1,75 @@
+{% extends 'shopapp/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="row mt-5 pt-4 pb-4 ">
+        <div class="col-4">
+            <div class="log-image">
+                <img src="{% static 'shopapp/images/lash.jpg' %}" alt="">
+            </div>
+        </div>
+        <div class="col-8">
+            <div class="log-links ms-3">
+                <div class="link-list">
+                    <a class="btn btn-primary sig" href="">SIGN UP</a>
+                    <a class="btn btn-primary" href="{% url 'shopusers:log' %}">SIGN IN</a>
+                    <!-- <li class="btn btn-primary"><a href="#">SIGN UP</a></li>
+                    <li class="btn btn-primary"><a href="#">SIGN IN</a></li> -->
+                </div>
+                <div class="sig-table mt-5">
+                    <form>
+                        <div class="form-group mb-3">
+                            <label for="username">First Name</label>
+                            <input type="text" class="form-control" name="username" placeholder="" required="">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="username">Last Name</label>
+                            <input type="text" class="form-control" name="username" placeholder="" required="">
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="username">Phone Number</label>
+                            <div class="d-flex">
+                                <span class="input-group-text">
+                                    <img class="me-1" src="{% static 'shopapp/images/kenya.png' %}" alt="">KE <i class="icofont-simple-down ms-1"></i>
+                                </span>
+                            <input type="number" class="form-control" name="Phonenumber" placeholder="" required="">
+                            </div>
+                            
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="exampleInputPassword1">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1">
+                          </div>
+                        <div class="ff">
+                            <span class="confirm">By Signing up you agree to our <a href="#">Terms of use</a>  and <a href="#">privacy policy</a> </span>
+                            <button type="submit" class="btn btn-primary">SIGN UP</button>
+                        </div>
+
+                        <div class="or">
+                            <p><span>or</span></p>
+                        </div>
+
+
+                        <div class="social-box">
+                            <div class="go">
+                                <a style="background-color: transparent; border-style: solid; border-radius: 8px; color: black; box-shadow: none; font-weight: 400;" class="btn btn-primary" href="#"><img style="height: 35px;" class="me-5" src="{% static 'shopapp/images/icons8-google-48.png' %}" alt="">  Sign up with google</a>
+                            </div>
+                            <div class="fa">
+                                <a style="background-color: transparent; border-style: solid; border-radius: 8px; color: black; box-shadow: none; font-weight: 400;" class="btn btn-primary" href="#"><img style="height: 35px;" class="me-5" src="{% static 'shopapp/images/icons8-facebook-48.png' %}" alt="">  Sign up with facebook</a>
+                            </div>
+                        </div>
+                         
+                      </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
