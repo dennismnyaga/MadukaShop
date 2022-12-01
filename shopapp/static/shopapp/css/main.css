@@ -203,8 +203,16 @@ header nav{
 }
 
 .container .row .col-8 .details .contact-seller{
-    margin-left: 2rem;
-    display: none;
+    margin-left: 1.6rem;
+    border-radius: 10px;
+    /* display: none; */
+}
+.container .row .col-8 .details .contact-seller .btn{
+    background-color: #020c2F;
+    border-style: none;
+    font-size: smaller;
+    line-height: 1rem;
+    font-weight: 700;
 }
 
 
@@ -213,6 +221,92 @@ header nav{
     display: none;
 }
 
+img:hover .contact-seller{
+    display: none;
+}
+
 .container .row .col-8 .pro-grid :hover .container .row .col-8 .details .contact-seller{
     display: block;
+}
+
+.container .row .col-8 .promotion-slider{
+    background-color: #fff;
+    border-radius: 8px;
+    width: 100%;
+    
+}
+ 
+.container .row .col-8 .promotion-slider .carousel-inner .carousel-item img{
+    width: 60%;
+    border-radius: 8px;
+} 
+
+
+.container .row .col-8 .promotion-slider .carousel{
+    padding: 1.5rem;
+}
+.container .row .col-8 .promotion-slider .carousel .carousel-indicators button{
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    margin-bottom: 1rem;
+    background-color: #020c2F !important;
+   
+}
+
+.container .row .col-8 .promotion-slider .carousel .carousel-indicators{
+    right: 300px;
+}
+
+
+.container .row .col-8 .promotion-slider .carousel-inner .carousel-item .carousel-caption{
+    color: #000;
+    right:-50%;  
+    top: 50px;
+   
+    
+}
+
+.container .row .col-8 .promotion-slider .carousel-inner .carousel-item .carousel-caption h5{
+    font-size: large;
+    line-height: 12px;
+    word-spacing: 1px;
+    font-weight: 700;
+}
+
+.container .row .col-8 .promotion-slider .carousel-inner .carousel-item .carousel-caption .btn{
+    background-color: #020c2F;
+    border-radius: 8px;
+    text-transform: uppercase;
+    border-style: none;
+    margin-top: 2rem;
+}
+
+
+.bottom-container{
+    background-color: #020c2F;
+    color: #ffff;
+}
+
+.bottom-container footer{
+    color: #ffff;
+}
+
+.bottom-container footer .border-top{
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.bottom-container footer .border-top ul li a i{
+    color: #fff;
+    font-size: larger;
+}
+
+.bottom-container footer form  i{
+    font-size: larger;
+}
+.bottom-container footer form .btn{
+    /* background-color: #fff; */
+    margin-left: 0;
+    /* padding-left: 0; */
 }
