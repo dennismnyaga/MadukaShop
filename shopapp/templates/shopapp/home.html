@@ -8,6 +8,7 @@
     <title>MadukaShop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'shopapp/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'shopapp/css/product.css' %}">
     <link rel="stylesheet" href="{% static 'shopapp/icofont/icofont.min.css' %}">
 </head>
 <body>
@@ -54,15 +55,17 @@
             </div>
           </div>
     </header>
+    
     <div class="main-con">
       <div class="container">
       
         <div class="row">
           <div class="col-4">
             <div class="titles">
-              <div class="featured">Featured</div>
-              <div class="featured">Near you</div>
-              <div class="featured">shops</div>
+              <a href="#"><div class="featured">Featured</div></a>
+              <a href="#"><div class="featured">Near you</div></a>
+              <a href="#"><div class="featured">Shops</div></a>
+        
             </div>
             <div class="cont">
               <div class="product-list">
@@ -115,7 +118,84 @@
               <hr>
             </div>
           </div>
-          <div class="col-8">col-8</div>
+          
+          <div class="col-8 me-0">
+            <div class="row row-cols-4 product-g">
+              <div class="col">
+                <div class="pro-grid">
+                  <div class="pro-img">
+                    <a href="#">
+                      <img class="pics1" src="{% static 'shopapp/images/pro.jpg' %}" alt="">
+                    </a>
+                    <span class="product-new-label btn btn-outline-secondary">SALE</span>
+                    <span class="product-like"><i class="icofont-ui-love"></i></span>
+                  </div>
+                  <span class="product-new-label">New</span>
+                  <div class="details">
+                    <div class="ti">
+                      <h4>Kinkle SunScreen</h4>
+                  
+                    </div>
+
+                    <div class="contact-seller">
+                      <a class="btn btn-primary" href="#">CONTACT SELLER</a>
+                    </div>
+                    
+                    <div class="direction">
+                      <i class="icofont-location-pin"></i>
+                      <h4>KAHAWA SUKARI</h4>
+                    </div>
+                    
+                  </div>
+                  <p class="price-tag">KES 2,000</p>
+                </div>
+              </div>
+              <div class="col">
+                <div class="pro-grid">
+                  <div class="pro-img">
+                    <a href="#">
+                      <img class="pics1" src="{% static 'shopapp/images/pro.jpg' %}" alt="">
+                    </a>
+                  </div>
+                  <span class="product-new-label">New</span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="pro-grid">
+                  <div class="pro-img">
+                    <a href="#">
+                      <img class="pics1" src="{% static 'shopapp/images/pro.jpg' %}" alt="">
+                    </a>
+                  </div>
+                  <span class="product-new-label">New</span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="pro-grid">
+                  <div class="pro-img">
+                    <a href="#">
+                      <img class="pics1" src="{% static 'shopapp/images/pro.jpg' %}" alt="">
+                    </a>
+                  </div>
+                  <span class="product-new-label">New</span>
+                </div>
+              </div>
+              <div class="col">
+                <div class="pro-grid">
+                  <div class="pro-img">
+                    <a href="#">
+                      <img class="pics1" src="{% static 'shopapp/images/pro.jpg' %}" alt="">
+                    </a>
+                    <span class="product-new-label btn btn-outline-secondary">SALE</span>
+                    <span class="product-like"><i class="icofont-ui-love"></i></span>
+                  </div>
+                  
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
           
         </div>
       </div>
