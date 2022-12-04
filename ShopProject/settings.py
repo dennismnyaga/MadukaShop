@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-wzm!-gpx0&*xgpkbvbted&_s%i+9)wb=twv$yd-c7cx6lte853
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['madukashop-production.up.railway.app', 'https://madukashop-production.up.railway.app/admin']
+ALLOWED_HOSTS = ['madukashop-production.up.railway.app']
 
 
 # Application definition
