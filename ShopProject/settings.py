@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-wzm!-gpx0&*xgpkbvbted&_s%i+9)wb=twv$yd-c7cx6lte853
 DEBUG = True
 
 ALLOWED_HOSTS = ['https://madukashop-production.up.railway.app', 'https://madukashop-production.up.railway.app/admin/login/']
-# CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/admin/login/']
 
 # Application definition
 
