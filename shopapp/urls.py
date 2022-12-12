@@ -11,5 +11,5 @@ urlpatterns = [
 
 
     path('multistepform/', views.multistepform, name='multistepform'),
-    path('multistepform_save/', views.multistepform_save, name='multistepform_save'),
+    # path('multistepform_save/', views.multistepform_save, name='multistepform_save'),
 ]

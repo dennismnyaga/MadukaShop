@@ -1,13 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,  redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib import messages
+from django.urls import reverse
 
 from .models import *
 
 # Create your views here.
 
 def home(request):
-    context = {}
+    products = Product.objects.all()
+    print(products)
+    context = {'products':products}
     return render(request, 'shopapp/home.html', context)
 
 
@@ -56,36 +59,76 @@ def add(request):
 
 
 def multistepform(request):
-    return render(request,"shopapp/multistepform.html")
+    categories = ProductCategory.objects.all()
+    locations = Location.objects.all()
+    shop = Shop.objects.all()
+    shopcategory = ShopCategory.objects.all()
 
-def multistepform_save(request):
-    if request.method!="POST":
-        return HttpResponseRedirect(reverse("shopapp:multistepform"))
-    else:
-        fname=request.POST.get("fname")
-        lname=request.POST.get("lname")
-        phone=request.POST.get("phone")
-        twitter=request.POST.get("twitter")
-        facebook=request.POST.get("facebook")
-        gplus=request.POST.get("gplus")
-        email=request.POST.get("email")
-        password=request.POST.get("pass")
-        cpass=request.POST.get("cpass")
-        if password!=cpass:
-            messages.error(request,"Confirm Password Doesn't Match")
-            return HttpResponseRedirect(reverse('shopapp:multistepform'))
+    if request.method == 'POST':
+        data = request.POST
+        if data['shop'] != 'none':
+            shop = Shop.objects.get(id=data['shop'])
+        elif data['shop_new'] != '':
+            shopimages = request.FILES.getlist('shop_images')
+            shop, created = Shop.objects.get_or_create(
+                name=data['shop_new'],
+                category = ProductCategory.objects.get(id=data['category']),
+                # location = Location.objects.get(id=data['shoplocation']),
+                description = data['des_new']
+                )
+            for image in shopimages:
+                Shopphoto = ShopPhoto.objects.create(
+                    shop=shop,
+                    image = image
+                )
+        
+        else:
+            shop = None
+        
+        category = ProductCategory.objects.get(id=data['category'])
+        location = Location.objects.get(id=data['location'])
+        
+        ad_title=data["ad_title"]
+        # ad_condition=request.POST("ad_condition")
+        price= data["ad_price"]
+        description= data["ad_description"]
+        # shop= data("shop")
+        images = request.FILES.getlist('images')
+        
+        
+        product, created = Product.objects.get_or_create(
+            ad_title = ad_title,
+            category = category,
+            location = location,
+            shop=shop,
+            description = description,
+            price = price,
+        )
 
-        try:
-            multistepform=MultiStepFormModel(fname=fname,lname=lname,phone=phone,twitter=twitter,facebook=facebook,gplus=gplus,email=email,password=password)
-            multistepform.save()
-            messages.success(request,"Data Save Successfully")
-            return HttpResponseRedirect(reverse('multistepform'))
-        except:
-            messages.error(request,"Error in Saving Data")
-            return HttpResponseRedirect(reverse('shopapp:multistepform'))
+
+        for image in images:
+            photo = ProductPhoto.objects.create(
+                product = product,
+                image=image,
+            )
+
+        messages.success(request,"Data Save Successfully")
+        return redirect('/')
+    context = {'categories':categories, 'locations':locations, 'shop':shop, 'shopcategory':shopcategory}
+    return render(request,"shopapp/multistepform.html", context)
+
+
+
 
 
 
 def about(request):
     context = {}
     return render(request, 'shopapp/about.html', context)
+
+
+
+
+
+
+# import  rembg import remove
