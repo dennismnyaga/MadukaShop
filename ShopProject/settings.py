@@ -27,7 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['https://madukashop-production.up.railway.app', 'https://madukashop-production.up.railway.app/admin/login/']
 # CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/admin/login/']
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://madukashop-production.up.railway.app'
+]
 # Application definition
 
 INSTALLED_APPS = [
