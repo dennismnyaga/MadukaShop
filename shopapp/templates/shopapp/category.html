@@ -2,14 +2,15 @@
 {% load static %}
 {% load humanize %}
 <script>
-  const links = document.querySelectorAll('.category-link');
-  links.forEach(link => {
-      link.addEventListener('click', e => {
-          links.forEach(link => link.classList.remove('active'));
-          link.classList.add('active');
-      });
-  });
+    const links = document.querySelectorAll('.category-link');
+    links.forEach(link => {
+        link.addEventListener('click', e => {
+            links.forEach(link => link.classList.remove('active'));
+            link.classList.add('active');
+        });
+    });
 </script>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 {% block content %}
@@ -19,7 +20,7 @@
     <div class="titles">
       <a href="#"><div class="featured">Featured</div></a>
       <a href="#"><div class="featured">Near you</div></a>
-      <a href="{% url 'shopapp:shops' %}"><div class="featured">Shops</div></a>
+      <a href="#"><div class="featured">Shops</div></a>
 
     </div>
     <div class="cont">

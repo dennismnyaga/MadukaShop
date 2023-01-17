@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -43,7 +44,15 @@ header nav{
     background-color: #ffff;  
     border-radius: 50%;
     border-style: none;
+    display: block;
+    transition: all 0.5s ease-in-out;
 }
+
+.navbar .container-fluid .btn-menu .coll button.hide{
+    display: none;
+}
+
+
 .navbar .container-fluid .btn-menu .coll i{
     color: #000;
     text-align: center;
@@ -51,12 +60,18 @@ header nav{
 }
 
 .searcher{
+    display: none;
+    transition: all 0.5s ease-in-out;
     z-index: 1;
     position: relative;
     width: 50%;
     background-color: #ffff;
     border-radius: 8px;
     height: 60px;
+}
+
+.searcher.show{
+    display: block;
 }
 
 .searcher .row .col .form-control{
@@ -105,7 +120,15 @@ header nav{
     background-color: #ffff;
     border-radius: 5px;
 }
+.container .row .col-4 .cont a{
+    text-decoration: none;
+    color: #000;
+}
 
+.container .row .col-4 .cont a.active{
+    background-color: #020c2F;
+    color: #fff;
+}
 .container .row .col-4 .cont .product-list{
     padding-top: 1rem;
     margin-left: 0.5rem;
@@ -123,115 +146,105 @@ header nav{
 }
 
 
-.container .row .col-8 .pro-grid .pro-img{
-    width: 13rem;
-    height: 15rem;
-    border-radius: 10px;
-    margin-top: 5px;
-    margin-bottom: 25px;
-    position: relative;
-}
-.container .row .col-8 .pro-grid .pro-img img{
-    height: 100%;
-    width: 100%;
-    border-radius: 10px;
-    
-}
+
 
 .container .row .col-8 .product-g{
     margin-top: 1rem;
 }
 
-.container .row .col-8 .product-new-label{
-    background-color: none;
-    color:#000;
-    font-size: large;
-    font-weight: 700;
-    padding:2px 10px;
-    position:absolute;
-    right:1px;
-    top:10px;
-    transition:all .3s;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 2px;
+.container .row .col-8 .product-g .card img{
+    height: 220px;
+    border-radius: 8px;
 }
 
-.container .row .col-8 .product-like{
-    background-color: none;
-    color:#000;
-    font-size: larger;
-    font-weight: 700;
-    padding:2px 10px;
-    position:absolute;
-    left:1px;
-    top:10px;
-    transition:all .3s;
-    border-radius: 5px;
+.container .row .col-8 .product-g .card{
+    margin-bottom: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.container .row .col-8 .product-g .card form{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    font-size: xx-large;
+    color: #000;
+    font-weight: 900;
+ 
+}
+
+.container .row .col-8 .product-g .card form button{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container .row .col-8 .product-g .card form .unlik{
+    color: red;
+}
+
+
+.container .row .col-8 .product-g .card .card-body .caption .ro{
+    display: flex;
+    justify-content: space-between;
     
 }
 
-.container .row .col-8 .details{
-    display: flex;
-    /* justify-content: space-between; */
-    margin-right: auto;
-}
-.container .row .col-8 .details .ti{
-    display: flex;
-    flex-direction: column;
-}
-.container .row .col-8 .price-tag{
-    font-weight: 700;
-}
-.container .row .col-8 .details .ti h4{
-    font-size: small;
+.container .row .col-8 .product-g .card .card-body .caption .ro .pric i{
+    font-size: larger;
+    margin-top: 5px;
 }
 
-
-.container .row .col-8 .details .direction{
-    display: flex;
-    margin-left: 2rem;
-}
-
-
-.container .row .col-8 .details .direction i{
-    font-size: x-large;
-}
-
-.container .row .col-8 .details .direction h4{
-    font-size: small;
-}
-
-.container .row .col-8 .pro-grid .pro-img:hover .container .row .col-8 .details .direction{
-    display: none;   
-}
-
-.container .row .col-8 .details .contact-seller{
-    margin-left: 1.6rem;
-    border-radius: 10px;
-    /* display: none; */
-}
-.container .row .col-8 .details .contact-seller .btn{
-    background-color: #020c2F;
-    border-style: none;
-    font-size: smaller;
-    line-height: 1rem;
-    font-weight: 700;
-}
-
-
-
-.container .row .col-8 .pro-grid :hover .details .direction{
-    display: none;
-}
-
-img:hover .contact-seller{
-    display: none;
-}
-
-.container .row .col-8 .pro-grid :hover .container .row .col-8 .details .contact-seller{
+.container .row .col-8 .product-g .card .card-body .caption .ro .pric{
     display: block;
 }
+.container .row .col-8 .product-g .card:hover  .card-body .caption .ro .pric{
+    display: none;
+    
+}
+.container .row .col-8 .product-g .card:hover .container .row .col-8 .product-g .card .card-body .caption .ro {
+    display: block;
+}
+.container .row .col-8 .product-g .card .card-body .caption .ro .con .btn{
+    display: none;
+}
+
+.container .row .col-8 .product-g .card .card-body .caption .ro .con{
+    text-align: center;
+   
+    font-size: smaller;
+}
+
+.container .row .col-8 .product-g .card .card-body .caption .ro  .con .btn{
+    font-size: smaller;
+    height: 45px;
+    width: 80px;
+    
+}
+
+.container .row .col-8 .product-g .card .card-body .caption .ro  .con a{
+    font-weight: 700;
+}
+
+.container .row .col-8 .product-g .card .like-button {
+  color: black;
+}
+
+.container .row .col-8 .product-g .card  .like-button .liked {
+  color: blue;
+}
+
+
+
+
+
+
+
+
 
 .container .row .col-8 .promotion-slider{
     background-color: #fff;

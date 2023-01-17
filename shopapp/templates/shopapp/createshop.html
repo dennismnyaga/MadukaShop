@@ -15,10 +15,10 @@
 <!-- Fonts and Icons -->
   <link href="https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
-
+<link href="{% static 'shopapp/css/themify-icons.css' %}" rel="stylesheet">
 <!-- MultiStep Form -->
 
-
+<div class="image-container set-full-height" style="background-image: url('assets/img/paper-1.jpeg')">
   <!--   Creative Tim Branding   -->
 
 
@@ -53,7 +53,7 @@
                     <div class="icon-circle">
                       <i class="ti-user"></i>
                     </div>
-                    Ad details
+                    Shop details
                   </a>
                 </li>
                               <li>
@@ -61,7 +61,7 @@
                     <div class="icon-circle">
                       <i class="ti-settings"></i>
                     </div>
-                    Ad information
+                    Shop information
                   </a>
                 </li>
                               <li>
@@ -77,7 +77,7 @@
                         <div class="tab-content">
                             <div class="tab-pane" id="about">
                               <div class="row">
-                  <h5 class="info-text FS-"> AD DETAILS</h5>
+                  <h5 class="info-text FS-"> Shop DETAILS</h5>
                   <div class="col-sm-4 col-sm-offset-1">
                     <div class="picture-container">
                       <div class="row">
@@ -85,8 +85,8 @@
                               <div class="c-7">
                               <div class="uploads-box">
                                     <div class="form-group files">
-                                      <label>Upload Ad images </label>
-                                      <input name="images" type="file" class="form-control " multiple="">
+                                      <label>Upload Shop images </label>
+                                      <input name="shop_images" type="file" class="form-control " multiple="">
                                     </div>
                               </div>
                               </div>
@@ -101,18 +101,18 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label>Ad Category <small>(required)</small></label>
+                      <label>Shop Category <small>(required)</small></label>
                       <select name="category" class="form-control form-select" aria-label="Default select example">
                         <option value='none'></option>
-                        {% for category in categories %}
-                          <option value='{{category.id}}'>{{category.name}}</option>
+                        {% for shopcategory in shopcategory %}
+                          <option value='{{shopcategory.id}}'>{{shopcategory.name}}</option>
                         {% endfor %}
                       </select>
                       <!-- <input name="firstname" type="text" class="form-control" placeholder="Andrew..."> -->
                     </div>
                     <div class="form-group">
-                      <label>Ad Location <small>(required)</small></label>
-                      <select name="location" class="form-control form-select" aria-label="Default select example">
+                      <label>Shop Location <small>(required)</small></label>
+                      <select name="shoplocation" class="form-control form-select" aria-label="Default select example">
                         <option value="none"></option>
                         {% for location in locations %}
                           <option value='{{location.id}}'>{{location.name}}</option>
@@ -134,17 +134,17 @@
                                 <div class="row">
                                   <div class="co-sm-6">
                                     <div class="form-group">
-                                      <label>Ad Title <small>(required)</small></label>
-                                      <input name="ad_title" type="text" class="form-control">
+                                      <label>Shop Title <small>(required)</small></label>
+                                      <input name="shop_name" type="text" class="form-control">
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                       <label>Ad Price <small>(required)</small></label>
                                       
                                       <input name="ad_price" type="number" class="form-control">
-                                    </div>
+                                    </div> -->
                                     <div class="form-group">
-                                      <label>Ad Description <small>(required)</small></label>
-                                      <textarea class="form-control" name="ad_description" id="" cols="30" rows="10"></textarea>
+                                      <label>Shop Description <small>(required)</small></label>
+                                      <textarea class="form-control" name="des_new" id="" cols="30" rows="10"></textarea>
                                       <!-- <input name="lastname" type="text" class="form-control"> -->
                                     </div>
                                   </div>
@@ -152,24 +152,10 @@
                             </div>
                             <div class="tab-pane" id="address">
                                 <div class="row">
-                                    <div class="co">
-                                        <h5 class="info-text"> Shop Details </h5>
+                                    <div class="col-sm-12">
+                                        <h5 class="info-text"> Save Shop </h5>
                                     </div>
-                                    <div class="co-offset-1">
-                                      <div class="form-group">
-                                            <label>Your Shop</label>
-                                            <select name="shop" class="form-control form-select" aria-label="Default select example">
-                                              <option value="none"></option>
-                                              {% for shop in shop %}
-                                                <option value='{{shop.id}}'>{{shop.name}}</option>
-                                              {% endfor %}
-                                            </select>
-                                            <!-- <input type="text" class="form-control" placeholder="5h Avenue"> -->
-                                        </div>
-                                        <h5 class="info-text"> Or </h5> 
-                                        <h5 class="info-text"> <a class="btn btn-info" href="{% url 'shopapp:create_shop' %}">Create Shop</a>   </h5> 
-                                                                                                         
-                                    </div>
+                                    
                                     
                             </div>
                         </div>

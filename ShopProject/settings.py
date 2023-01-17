@@ -51,7 +51,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'django.contrib.humanize',
+
+    'phonenumber_field',
+    # 'CustomUser',
+    'django_filters',
+    'rest_framework',
+  
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,14 +94,21 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '1JdotUDMS36KgMQCSiaF',
+#         'HOST': 'containers-us-west-139.railway.app',
+#         'PORT': '7791',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '1JdotUDMS36KgMQCSiaF',
-        'HOST': 'containers-us-west-139.railway.app',
-        'PORT': '7791',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
@@ -185,3 +199,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+
+
+AUTH_USER_MODEL = 'ShopUser.CustomUser'
+
+
+

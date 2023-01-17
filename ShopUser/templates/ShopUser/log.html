@@ -1,6 +1,36 @@
 {% extends 'shopapp/main.html' %}
 {% load static %}
 {% block content %}
+<style>
+    input[type="text"], [type="email"], input[type="password"],[type="number"] {
+    width: 100%;
+    /* padding: 12px 20px;
+    margin: 8px 0; */
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+  }
+  input[type="text"],[type="email"],[type="number"], input[type="password"]:focus{
+    border: none;
+    outline: none;
+  }
+  input#id_phone_number {
+  width: 100%;
+  /* padding: 12px 20px;
+  margin: 8px 0; */
+  box-sizing: border-box;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  border: none;
+}
+
+input#id_phone_number:focus{
+    outline: none;
+}
+.alert{
+    background-color: rgb(252, 70, 70);
+}
+</style>
     <div class="row mt-5 pt-4 pb-4 ">
         <div class="col-4">
             <div class="log-image">
@@ -10,31 +40,35 @@
         <div class="col-8">
             <div class="log-links ms-3">
                 <div class="link-list">
-                    <a style=" background-color: transparent;" class="btn btn-primary sig" href="{% url 'shopusers:home' %}">SIGN UP</a>
+                    <a style=" background-color: transparent;" class="btn btn-primary sig" href="{% url 'shopusers:register' %}">SIGN UP</a>
                     <a style=" background-color: #020c2F;" class="btn btn-primary" href="#">SIGN IN</a>
                     <!-- <li class="btn btn-primary"><a href="#">SIGN UP</a></li>
                     <li class="btn btn-primary"><a href="#">SIGN IN</a></li> -->
                 </div>
                 <div class="sig-table mt-5">
-                    <form>
-                        
-                        
+                    {% if form.errors %}
+                        <p class="alert alert-secondary text-center error" role="alert">
+                         Your email or password is incorrect
+                        </p>
+                    {% endif %}
+                    <form method="post" action="">
+                        {% csrf_token %}
                         <div class="mb-3">
-                          <label for="exampleInputEmail1" class="form-label">Email address/ Phone Number</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <div class="form-control">{{ form.email }}</div>
                           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         
                         <div class="mb-3">
                           <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
+                          <div class="form-control">{{ form.password }}</div>
                         </div>
                         
                         <div class="ff">
                             <button type="submit" class="btn btn-primary">Login</button>
                         </div>
 
-                        <div class="or">
+                        <!-- <div class="or">
                             <p><span>or</span></p>
                         </div>
 
@@ -46,7 +80,7 @@
                             <div class="fa">
                                 <a style="background-color: transparent; border-style: solid; border-radius: 8px; color: black; box-shadow: none; font-weight: 400;" class="btn btn-primary" href="#"><img style="height: 35px;" class="me-5" src="{% static 'shopapp/images/icons8-facebook-48.png' %}" alt="">  Login with facebook</a>
                             </div>
-                        </div>
+                        </div> -->
                          
                       </form>
                 </div>

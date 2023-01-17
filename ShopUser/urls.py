@@ -4,6 +4,7 @@ from .import views
 
 app_name = 'shopusers'
 urlpatterns = [
-    path('', views.home, name = 'home'),
-    path('login/', views.log, name = 'log'),
+  
+    path('login/', views.login_view, name = 'login'),
+    path('register/', views.register_view, name='register'),
 ]

@@ -1,6 +1,37 @@
 {% extends 'shopapp/main.html' %}
 {% load static %}
 {% block content %}
+<style>
+    input[type="text"], [type="email"], input[type="password"],[type="number"] {
+    width: 100%;
+    /* padding: 12px 20px;
+    margin: 8px 0; */
+    box-sizing: border-box;
+    border: none;
+    border-radius: 4px;
+  }
+  input[type="text"],[type="email"],[type="number"], input[type="password"]:focus{
+    border: none;
+    outline: none;
+  }
+  input#id_phone_number {
+  width: 100%;
+  /* padding: 12px 20px;
+  margin: 8px 0; */
+  box-sizing: border-box;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  border: none;
+}
+
+input#id_phone_number:focus{
+    outline: none;
+}
+.alert{
+    background-color: rgb(252, 70, 70);
+}
+</style>
+
     <div class="row mt-5 pt-4 pb-4 ">
         <div class="col-4">
             <div class="log-image">
@@ -16,22 +47,47 @@
                     <li class="btn btn-primary"><a href="#">SIGN IN</a></li> -->
                 </div>
                 <div class="sig-table mt-5">
-                    <form>
+                   
+                        {% if form.errors %}
+                        <p class="alert alert-secondary text-center error" role="alert">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                            <h5>{{ error }}</h5>
+                            {% endfor %}
+                        {% endfor %}
+                        </p>
+                        {% endif %}
+                    
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                       
+                        <button name="submit">Register</button>
+                        
+                        </form>
+                    <!-- <form method="post" action="{% url 'shopusers:register' %}">
+                        {% csrf_token %}
+                        
+                       
                         <div class="form-group mb-3">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" name="username" placeholder="" required="">
+                            <label for="username">Profile Picture</label>
+                            <div class="form-control">{{ form.profile_pic }}</div>
+                          
                         </div>
                         <div class="form-group mb-3">
                             <label for="username">First Name</label>
-                            <input type="text" class="form-control" name="username" placeholder="" required="">
+                            <div class="form-control">{{ form.first_name }}</div>
+                          
                         </div>
                         <div class="form-group mb-3">
                             <label for="username">Last Name</label>
-                            <input type="text" class="form-control" name="username" placeholder="" required="">
+                            <div class="form-control">{{ form.last_name }}</div>
+                           
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputEmail1" class="form-label">Email address</label>
-                          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div class="form-control">{{ form.email }}</div>
+                          
                           <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div class="form-group mb-3">
@@ -40,38 +96,28 @@
                                 <span class="input-group-text">
                                     <img class="me-1" src="{% static 'shopapp/images/kenya.png' %}" alt="">KE <i class="icofont-simple-down ms-1"></i>
                                 </span>
-                            <input type="number" class="form-control" name="Phonenumber" placeholder="" required="">
+                                <div class="form-control">{{ form.phone_number }}</div>
+                           
                             </div>
                             
                         </div>
                         <div class="mb-3">
                           <label for="exampleInputPassword1" class="form-label">Password</label>
-                          <input type="password" class="form-control" id="exampleInputPassword1">
+                          <div class="form-control">{{ form.password1 }}</div>
+                       
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <div class="form-control">{{ form.password2 }}</div>
+                         
                           </div>
                         <div class="ff">
                             <span class="confirm">By Signing up you agree to our <a href="#">Terms of use</a>  and <a href="#">privacy policy</a> </span>
                             <button type="submit" class="btn btn-primary">SIGN UP</button>
                         </div>
 
-                        <div class="or">
-                            <p><span>or</span></p>
-                        </div>
-
-
-                        <div class="social-box">
-                            <div class="go">
-                                <a style="background-color: transparent; border-style: solid; border-radius: 8px; color: black; box-shadow: none; font-weight: 400;" class="btn btn-primary" href="#"><img style="height: 35px;" class="me-5" src="{% static 'shopapp/images/icons8-google-48.png' %}" alt="">  Sign up with google</a>
-                            </div>
-                            <div class="fa">
-                                <a style="background-color: transparent; border-style: solid; border-radius: 8px; color: black; box-shadow: none; font-weight: 400;" class="btn btn-primary" href="#"><img style="height: 35px;" class="me-5" src="{% static 'shopapp/images/icons8-facebook-48.png' %}" alt="">  Sign up with facebook</a>
-                            </div>
-                        </div>
-                         
-                      </form>
+                       
+                      </form> -->
                 </div>
             </div>
         </div>

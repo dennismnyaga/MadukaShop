@@ -19,7 +19,7 @@
     <div class="titles">
       <a href="#"><div class="featured">Featured</div></a>
       <a href="#"><div class="featured">Near you</div></a>
-      <a href="{% url 'shopapp:shops' %}"><div class="featured">Shops</div></a>
+      <a href="#"><div class="featured">Shops</div></a>
 
     </div>
     <div class="cont">
@@ -41,53 +41,30 @@
   
   <div class="col-8 me-0">
     <div class="row row-cols-4 product-g">
-      {% for product in products|slice:":6" %}
+        {% for shop in shops|slice:":6" %}
       
       <div class="col-md-4">
         <!-- ============================== -->
       <div class="card " style="width: 15rem;">
-        {% with product.images.first as product_image %}
-        <a href="{% url 'shopapp:details' product.id %}">
-        <img src="{{ product_image.image.url }}" class="card-img-top" alt="{{ product.ad_title }}">
-      </a>
-      
-      {% if user.is_authenticated %}
-      {% if product in user.liked_products.all %}
-      <form class="liked" id="unlike-form" action="{% url 'shopapp:like' %}" method="post">
-        {% csrf_token %}
+        {% with shop.shop_images.first as shop_image %}
         
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <button type="submit"><span class="material-symbols-outlined unlik">
-          favorite
-          </span></button>
-        
-      </form> 
-      {% else %}
-        <!-- Display the like button -->
-        <form class="like" id="like-form" action="{% url 'shopapp:like' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="product_id" value="{{ product.id }}">
-            <button type="submit"><span class="material-symbols-outlined lik">
-              favorite
-              </span></button>
-        </form>
-    {% endif %}
-{% endif %}
-      
+        <!-- <a href="{% url 'shopapp:shop_detail' shop.id %}"> -->
+        <img src="{{ shop_image.image.url }}" class="card-img-top" alt="{{ shop.ad_title }}">
+        <!-- </a> -->
         {% endwith %}
         <div class="card-body">
-          <h5 class="card-title">{{product.ad_title }}</h5>
+          <h5 class="card-title">{{ shop.name }}</h5>
           <div class="caption">
             <div class="ro">
-							<div class="price">
-								<p>KES {{product.price|intcomma}}</p>
-							</div>
+							<!-- <div class="price">
+								<p>contact </p>
+							</div> -->
 							<div class=" pric d-flex">
-								<i class="icofont-location-pin"></i>
-                <p>{{ product.location }}</p>
+								LOCATION:  <i class="icofont-location-pin"></i>
+                <p>{{ shop.location }}</p>
 							</div>
               <div class="pri con d-flex">
-                <a class="btn btn-info " href="tel:{{product.owner.phone_number}}">CONTACT SELLER</a>
+                <a class="btn btn-info " href="tel:{{product.owner.phone_number}}">CONTACT SHOP</a>
 							</div>
 						</div>
           </div>
@@ -139,54 +116,33 @@
     </div>
     
     <div class="row row-cols-4 product-g">
-      {% for product in products|slice:"6:" %}
+      {% for shop in shops|slice:"6:" %}
       
       <div class="col-md-4">
         <!-- ============================== -->
       <div class="card " style="width: 15rem;">
-        {% with product.images.first as product_image %}
-        <a href="{% url 'shopapp:details' product.id %}">
-        <img src="{{ product_image.image.url }}" class="card-img-top" alt="{{ product.ad_title }}">
-      </a>
-      {% if user.is_authenticated %}
-      {% if product in user.liked_products.all %}
-      <form class="liked" id="unlike-form" action="{% url 'shopapp:like' %}" method="post">
-        {% csrf_token %}
+        {% with shop.shop_images.first as shop_image %}
         
-        <input type="hidden" name="product_id" value="{{ product.id }}">
-        <button type="submit"><span class="material-symbols-outlined unlik">
-          favorite
-          </span></button>
-        
-      </form> 
-      {% else %}
-        <!-- Display the like button -->
-        <form class="like" id="like-form" action="{% url 'shopapp:like' %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="product_id" value="{{ product.id }}">
-            <button type="submit"><span class="material-symbols-outlined lik">
-              favorite
-              </span></button>
-        </form>
-    {% endif %}
-{% endif %}
+        <img src="{{ shop_image.image.url }}" class="card-img-top" alt="{{ shop.name }}">
+
+       
         <!-- <span class="material-symbols-outlined">
           favorite
           </span> -->
       
         {% endwith %}
         <div class="card-body">
-          <h5 class="card-title">{{product.ad_title }}</h5>
+          <h5 class="card-title">{{shop.name }}</h5>
           <div class="caption">
             <div class="ro">
-							<div class="price">
-								<p>KES {{product.price|intcomma}}</p>
-							</div>
-							<div class=" pric d-flex">
-								<i class="icofont-location-pin"></i>
+            <!-- <div class="price">
+                <p>KES {{product.price|intcomma}}</p>
+            </div> -->
+            <div class=" pric d-flex">
+                <i class="icofont-location-pin"></i>
                 <p>{{ product.location }}</p>
-							</div>
-						</div>
+            </div>
+        </div>
           </div>
           </div>
       </div>
