@@ -24,7 +24,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=30)
     profile_pic = models.ImageField(upload_to = 'user_images', null=True, blank=True, default='samuele-bertoli-C0gX9PFh07Q-unsplash.jpg')
-    # , default='samuele-bertoli-C0gX9PFh07Q-unsplash.jpg'
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -32,12 +31,3 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number',]
-
-
-
-    # class Meta:
-    #     abstract = True
-
-
-# class User(CustomUser):
-#     pass

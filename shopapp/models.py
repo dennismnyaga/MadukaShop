@@ -5,10 +5,11 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-#from ShopUser.models import CustomUser
+
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='category_images', blank=True)
 
     def __str__(self):
         return self.name
@@ -21,33 +22,7 @@ class Location(models.Model):
         return self.name
 
 
-# class ShopCategory(models.Model):
-#     name = models.CharField(max_length=200)
 
-#     def __str__(self):
-#         return self.name
-
-
-# class Shop(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-#     owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
-#     name = models.CharField(max_length=200)
-#     category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE)
-#     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-#     description = models.CharField(max_length=200)
-   
-
-#     def __str__(self):
-#         return self.name
-
-
-
-# class ShopPhoto(models.Model):
-#     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='product_image')
-
-#     def __str__(self):
-#         return self.shop
 
 class ShopCategory(models.Model):
     name = models.CharField(max_length=200)
@@ -71,8 +46,8 @@ class Shop(models.Model):
 
 
 class ShopPhoto(models.Model):
-    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='shop_images')
-    image = models.ImageField(upload_to='product_image')
+    shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='shopimages')
+    image = models.ImageField(upload_to='product_images')
 
 
     def __str__(self):
@@ -109,6 +84,12 @@ class ProductImage(models.Model):
         return self.product.ad_title
 
 
+
+    def setImageUrl(self, url):
+        self.image_url = url
+        self.save()
+
+
 class Like(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -118,13 +99,6 @@ class Like(models.Model):
     def __str__(self):
         return self.product.ad_title
 
-# class ProductPhoto(models.Model):
-#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-#     image = models.ImageField(upload_to='product_image')
-
-
-#     def __str__(self):
-#         return self.name
 
 
 # ===========================================================================================================
