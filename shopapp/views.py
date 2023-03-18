@@ -40,7 +40,7 @@ def apiproductdetails(request, pk):
 def create_productApi(request):
     if request.method == 'POST':
         print(f"This is the response data: {request.data}")
-        serializer = ProductSerializer(data=request.data, context={'request': request})
+        serializer = AddProductSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             images = request.FILES.getlist('images')
             serializer.save(owner=request.user, images=images)
@@ -52,6 +52,29 @@ def create_productApi(request):
 
 
 create_productApi.parsers = [MultiPartParser(), FormParser()]
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_shopApi(request):
+    if request.method == 'POST':
+        serializer = AddShopSerializer(data=request.data, context={'request': request})
+        print(request.data)
+        if serializer.is_valid():
+            shopimages = request.FILES.getlist('shopimages')
+            serializer.save(owner=request.user, shopimages=shopimages)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            error_msg = f"Validation error: {serializer.errors}"
+            print(error_msg)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
+create_shopApi.parsers = [MultiPartParser(), FormParser()]
+
 
 
 @api_view(['GET'])
@@ -99,228 +122,5 @@ def apiLike(request):
 
 
 
-def home(request):
-
-    products = Product.objects.prefetch_related(
-        'images').order_by('-date_posted')
-    categories = ProductCategory.objects.annotate(
-        num_products=Count('product'))
-    context = {'products': products, 'categories': categories}
-
-    return render(request, 'shopapp/home.html', context)
 
 
-def shops(request):
-    shops = Shop.objects.prefetch_related(
-        'shop_images').order_by('-registered_on')
-    categories = ProductCategory.objects.annotate(
-        num_products=Count('product'))
-    context = {'shops': shops, 'categories': categories}
-    return render(request, 'shopapp/shops.html', context)
-
-
-def shop_details(request, shop_id):
-    categories = ProductCategory.objects.annotate(
-        num_products=Count('product'))
-
-    shop = Shop.objects.get(id=shop_id)
-
-    context = {'categories': categories, 'shop': shop}
-    return render(request, 'shopapp/shop_details.html', context)
-
-
-def like(request):
-    if request.method == 'POST':
-        product_id = request.POST['product_id']
-        product = Product.objects.get(id=product_id)
-        user = request.user
-        existing_like = Like.objects.filter(user=user, product=product).first()
-        if existing_like:
-            existing_like.delete()
-        else:
-            Like.objects.create(user=user, product=product)
-
-        return redirect('shopapp:home')
-
-
-def view_category(request, category_id):
-    category = get_object_or_404(ProductCategory, pk=category_id)
-    product = Product.objects.filter(category=category)
-    products = product.prefetch_related('images').order_by('-date_posted')
-    categories = ProductCategory.objects.annotate(
-        num_products=Count('product'))
-    context = {
-        'category': category,
-        'products': products,
-        'categories': categories,
-    }
-    return render(request, 'shopapp/category.html', context)
-
-
-def detail_page(request, product_id):
-    product = Product.objects.get(id=product_id)
-    images = ProductImage.objects.filter(product=product)
-
-    product.update_views()
-
-    products = Product.objects.prefetch_related('images').all()
-    context = {'product': product, 'images': images, 'products': products}
-
-    return render(request, 'shopapp/details.html', context)
-
-
-
-
-def create_product(request):
-    products = Product.objects.all()
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.save()
-            for image in request.FILES.getlist('images'):
-                ProductImage.objects.create(product=product, image=image)
-            return redirect('shopapp:home')
-            # return redirect('products:detail', pk=product.pk)
-    else:
-        form = ProductForm()
-    context = {'products': products, 'form': form}
-    return render(request, 'shopapp/create_product.html', context)
-
-
-def details(request):
-    context = {}
-    return render(request, 'shopapp/details.html', context)
-
-
-def add(request):
-    if request.method == 'POST':
-        data = request.POST
-        images = request.FILES.getlist('images')
-        # if data['category'] != 'none':
-        #     category = Category.objects.get(id=data['category'])
-        # elif data['category_new'] != '':
-        #     category, created = Category.objects.get_or_create(
-        #         name=data['category_new'])
-        # else:
-        #     category = None
-        # ===================================
-        product, created = Product.objects.get_or_create(
-            # poster=request.user,
-            name=request.POST['name'],
-            price=request.POST['price'],
-            condition=request.POST['condition'],
-            description=request.POST['description'],
-            category=request.POST['category']
-
-            # expected_sales_date = request.POST['expected_sales_date'],
-
-        )
-        # ===================================
-
-        for image in images:
-            photo = Photo.objects.create(
-                product=product,
-                image=image,
-            )
-
-        return redirect('/')
-
-    context = {}
-    return render(request, 'shopapp/add.html', context)
-
-
-def multistepform(request):
-    categories = ProductCategory.objects.all()
-    locations = Location.objects.all()
-    shop = Shop.objects.all()
-    shopcategory = ShopCategory.objects.all()
-
-    if request.method == 'POST':
-        data = request.POST
-        # if data['shop'] != 'none':
-        shop = Shop.objects.get(id=data['shop'])
-        # elif data['shop_new'] != '':
-        # shopimages = request.FILES.getlist('shop_images')
-        # shop, created = Shop.objects.get_or_create(
-        # name=data['shop_new'],
-        # category = ProductCategory.objects.get(id=data['category']),
-        # location = Location.objects.get(id=data['shoplocation']),
-        # description = data['des_new']
-        #         )
-        #     for image in shopimages:
-        #         Shopphoto = ShopPhoto.objects.create(
-        #             shop=shop,
-        #             image = image
-        #         )
-
-        # else:
-        #     shop = None
-
-        category = ProductCategory.objects.get(id=data['category'])
-        location = Location.objects.get(id=data['location'])
-
-        ad_title = data["ad_title"]
-        # ad_condition=request.POST("ad_condition")
-        price = data["ad_price"]
-        description = data["ad_description"]
-        # shop= data("shop")
-        images = request.FILES.getlist('images')
-        owner = request.user
-
-        product, created = Product.objects.get_or_create(
-            ad_title=ad_title,
-            category=category,
-            location=location,
-            shop=shop,
-            description=description,
-            price=price,
-            owner=owner,
-        )
-
-        for image in images:
-            photo = ProductImage.objects.create(
-                product=product,
-                image=image,
-            )
-
-        messages.success(request, "Data Save Successfully")
-        return redirect('/')
-    context = {'categories': categories, 'locations': locations,
-               'shop': shop, 'shopcategory': shopcategory}
-    return render(request, "shopapp/multistepform.html", context)
-
-
-def addshop(request):
-    categories = ProductCategory.objects.all()
-    locations = Location.objects.all()
-    shop = Shop.objects.all()
-    shopcategory = ShopCategory.objects.all()
-
-    if request.method == 'POST':
-        data = request.POST
-        shopimages = request.FILES.getlist('shop_images')
-        shop, created = Shop.objects.get_or_create(
-            name=data['shop_name'],
-            category=ShopCategory.objects.get(id=data['category']),
-            location=Location.objects.get(id=data['shoplocation']),
-            description=data['des_new'],
-            owner=request.user,
-        )
-        for image in shopimages:
-            Shopphoto = ShopPhoto.objects.create(
-                shop=shop,
-                image=image
-            )
-        messages.success(request, "Shop has been created Successfuly")
-        return redirect('shopapp:home')
-    context = {'categories': categories, 'locations': locations,
-               'shop': shop, 'shopcategory': shopcategory}
-    return render(request, "shopapp/createshop.html", context)
-
-
-def about(request):
-    context = {}
-    return render(request, 'shopapp/about.html', context)
-
-
-# import  rembg import remove

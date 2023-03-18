@@ -64,6 +64,7 @@ class Product(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_products', through='Like')
     views = models.PositiveIntegerField(default=0)
+   
 
 
 

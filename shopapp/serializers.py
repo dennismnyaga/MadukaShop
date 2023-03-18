@@ -2,10 +2,7 @@ from rest_framework.serializers import ModelSerializer, ImageField, PrimaryKeyRe
 from . models import *
 from rest_framework import serializers
 
-class ShopImageSerializer(ModelSerializer):
-    class Meta:
-        model = ShopPhoto
-        fields = ['id', 'image']
+
 
 
 class ProductImageSerializer(ModelSerializer):
@@ -17,57 +14,24 @@ class ProductImageSerializer(ModelSerializer):
 
 class ProductSerializer(ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
-    date_posted = serializers.ReadOnlyField()
+    
     class Meta:
         model = Product
         fields = '__all__'
 
 
-# class AddProductImageSerializer(ModelSerializer):
-#     image = serializers.ImageField(required=False)
-    
-#     class Meta:
-#         model = ProductImage
-#         fields = ('image')
-
-
-# class AddProductSerializer(ModelSerializer):
-#     image = AddProductImageSerializer(many=True)
-#     owner = serializers.ReadOnlyField(source='owner.email')
-
-#     class Meta:
-#         model = Product
-#         fields = '__all__'
-#         read_only_fields = ('id', 'date_posted', 'likes', 'views', 'owner')
-
-#     def create(self, validated_data):
-#         images_data = self.context.get('view').request.FILES
-#         images_serializer = self.fields['image']
-#         product = Product.objects.create(**validated_data)
-
-
-#         for image_data in images_data.values():
-#             image = {'image': image_data}
-#             serializer = images_serializer(data=image)
-
-#             if serializer.is_valid():
-#                 serializer.save(product=product)
-#             else:
-#                 raise serializer.errors
-
-#         return product
 
 
 
-class ProductImageSerializer(serializers.ModelSerializer):
+class AddProductImageSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
     
     class Meta:
         model = ProductImage
         fields = ('id', 'image')
 
-class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True, required=False)
+class AddProductSerializer(serializers.ModelSerializer):
+    images = AddProductImageSerializer(many=True, required=False)
 
     class Meta:
         model = Product
@@ -91,12 +55,48 @@ class ProductSerializer(serializers.ModelSerializer):
        
 
 
+class ShopImageSerializer(ModelSerializer):
+    class Meta:
+        model = ShopPhoto
+        fields = ['id', 'image']
 
 class ShopSerializer(ModelSerializer):
     shopimages = ShopImageSerializer(many=True, read_only=True)
     class Meta:
         model = Shop
         fields = '__all__'
+
+
+class AddShopImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
+    
+    class Meta:
+        model = ShopPhoto
+        fields = ('id', 'image')
+
+class AddShopSerializer(serializers.ModelSerializer):
+    shopimages = AddShopImageSerializer(many=True, required=False)
+
+    class Meta:
+        model = Shop
+        fields = ('id', 'name', 'category', 'location', 'description', 'shopimages')
+
+       
+
+        
+
+    def create(self, validated_data):
+        images_data = validated_data.pop('shopimages', [])
+        print(f"This is the images data {images_data}")
+        shop = Shop.objects.create(**validated_data)
+        for image_data in images_data:
+            image_dict = {'image': image_data}
+            shop_image = ShopPhoto.objects.create(shop=shop,  **image_dict)
+        return shop
+
+
+
+    
 
 
 
