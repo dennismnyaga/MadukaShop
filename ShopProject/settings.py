@@ -107,23 +107,23 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER': 'postgres',
-#         'PASSWORD': '1JdotUDMS36KgMQCSiaF',
-#         'HOST': 'containers-us-west-139.railway.app',
-#         'PORT': '7791',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': '1cHGQ3TnjKfL8gWocriA',
+        'HOST': 'containers-us-west-40.railway.app',
+        'PORT': '6298',
     }
 }
+# OIpNqApx2M6bipOEJQAA
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 
 # Password validation

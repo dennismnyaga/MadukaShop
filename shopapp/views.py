@@ -25,11 +25,35 @@ def apihome(request):
     return Response(serializer.data)
 
 
-@api_view(['GET'])
+# @api_view(['GET'])
+# def apiproductdetails(request, pk):
+#     products = Product.objects.get(id=pk)
+#     serializer = ProductSerializer(products, many=False)
+#     return Response(serializer.data)
+
+@api_view(['GET', 'PUT', 'DELETE'])
 def apiproductdetails(request, pk):
-    products = Product.objects.get(id=pk)
-    serializer = ProductSerializer(products, many=False)
-    return Response(serializer.data)
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ProductSerializer(product)
+        print("I am called details!")
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = ProductSerializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        product.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 
