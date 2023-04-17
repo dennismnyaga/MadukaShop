@@ -31,4 +31,6 @@ urlpatterns = [
     path('likes/', views.apiLike, name='like'),
     path('createproductsapi/', views.create_productApi, name='create_product'),
     path('shopcreateapi/', views.create_shopApi, name='create_shop'),
+    path('apicategoryproduct/<str:pk>/', views.apiCategoryProducts, name='category_product'),
+    path('createnewsletter/', views.newsletter_emails, name='news_letter'),
 ]

@@ -35,7 +35,6 @@ def apiuserhome(request):
 
 @api_view(['POST'])
 def register_user(request):
-    print(request.data)
     email = request.data.get('email')
     password = request.data.get('password')
     first_name = request.data.get('first_name')

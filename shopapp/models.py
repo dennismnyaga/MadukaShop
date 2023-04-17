@@ -86,9 +86,7 @@ class ProductImage(models.Model):
 
 
 
-    def setImageUrl(self, url):
-        self.image_url = url
-        self.save()
+    
 
 
 class Like(models.Model):
@@ -102,5 +100,12 @@ class Like(models.Model):
 
 
 
+
+class NewsLetterEmails(models.Model):
+    email = models.CharField(max_length=200)
+    time_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
 # ===========================================================================================================
 

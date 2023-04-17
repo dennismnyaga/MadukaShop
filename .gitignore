@@ -130,3 +130,10 @@ dmypy.json
 .pyre/
 __pycache__/
 *.sqlite3
+
+
+v_env/ 
+__pycache__/
+*.sqlite3
+*.mydatabase
+mydatabase

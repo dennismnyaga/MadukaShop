@@ -55,16 +55,13 @@ def apiproductdetails(request, pk):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
-
-
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_productApi(request):
     if request.method == 'POST':
         print(f"This is the response data: {request.data}")
-        serializer = AddProductSerializer(data=request.data, context={'request': request})
+        serializer = AddProductSerializer(
+            data=request.data, context={'request': request})
         if serializer.is_valid():
             images = request.FILES.getlist('images')
             serializer.save(owner=request.user, images=images)
@@ -78,12 +75,12 @@ def create_productApi(request):
 create_productApi.parsers = [MultiPartParser(), FormParser()]
 
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create_shopApi(request):
     if request.method == 'POST':
-        serializer = AddShopSerializer(data=request.data, context={'request': request})
+        serializer = AddShopSerializer(
+            data=request.data, context={'request': request})
         print(request.data)
         if serializer.is_valid():
             shopimages = request.FILES.getlist('shopimages')
@@ -100,12 +97,22 @@ def create_shopApi(request):
 create_shopApi.parsers = [MultiPartParser(), FormParser()]
 
 
-
 @api_view(['GET'])
 def apiCategory(request):
     category = ProductCategory.objects.all()
     serializer = CategorySerializer(category, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def apiCategoryProducts(request, pk):
+    try:
+        productCategory = ProductCategory.objects.get(pk=pk)
+        productsInCategory = Product.objects.filter(category=productCategory)
+        serializer = ProductCategorySerializer(productsInCategory, many=True)
+        return Response(serializer.data)
+    except ProductCategory.DoesNotExist:
+        return Response(status=404)
 
 
 @api_view(['GET'])
@@ -144,7 +151,10 @@ def apiLike(request):
 
 
 
-
-
-
-
+@api_view(['POST'])
+def newsletter_emails(request):
+    serializer = NewsLetterEmailsSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

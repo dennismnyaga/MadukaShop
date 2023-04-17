@@ -36,12 +36,14 @@ PyJWT==2.6.0
 python-dateutil==2.8.2
 python3-openid==3.2.0
 pytz==2022.7.1
-requests==2.28.1
+requests==2.28.2
 requests-oauthlib==1.3.1
 s3transfer==0.6.0
 six==1.16.0
 sqlparse==0.4.3
 tomli==2.0.1
 tzdata==2022.6
+uplink==0.9.7
+uritemplate==4.1.1
 urllib3==1.26.13
 whitenoise==6.2.0

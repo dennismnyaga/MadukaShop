@@ -13,5 +13,6 @@ admin.site.register(Shop)
 admin.site.register(ShopCategory)
 admin.site.register(Like)
 admin.site.register(ShopPhoto)
+admin.site.register(NewsLetterEmails)
 
 
