@@ -32,7 +32,8 @@ ALLOWED_HOSTS = ['https://madukashop-production.up.railway.app',
                  'https://madukashop-production.up.railway.app/admin/login/']
 # CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/admin/login/']
 CSRF_TRUSTED_ORIGINS = [
-    'https://madukaonline.co.ke/'
+    'https://madukaonline.co.ke/',
+    'www.madukaonline.co.ke/',
 ]
 # Application definition
 
