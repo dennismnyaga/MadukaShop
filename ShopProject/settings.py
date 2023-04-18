@@ -232,7 +232,7 @@ AUTH_USER_MODEL = 'ShopUser.CustomUser'
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://madukaonline.co.ke/'
+    'https://madukaonline.co.ke'
 ]
 CORS_ALLOW_CREDENTIALS: True
 

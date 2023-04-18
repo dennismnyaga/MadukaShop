@@ -1,24 +1,12 @@
 from django.urls import path
 from .import views
+from django.views.generic import TemplateView
+from django.urls import re_path
 
 
 app_name = 'shopapp'
 urlpatterns = [
-    # path('', views.home, name = 'home'),
-    # path('shops/', views.shops, name = 'shops'),
-    # path('shop_detail/<shop_is>/', views.shop_details, name = 'shop_detail'),
-    # path('like/', views.like, name='like'),
-    # path('details/<product_id>/', views.detail_page, name = 'details'),
-    # path('details/', views.details, name = 'details'),
-    # path('add/', views.add, name = 'add'),
-    # path('about/', views.about, name = 'about'),
 
-
-    # path('multistepform/', views.multistepform, name='multistepform'),
-    # path('multistepform_save/', views.multistepform_save, name='multistepform_save'),
-    # path('create_product/', views.create_product, name='create_form'),
-    # path('create_shop/', views.addshop, name='create_shop'),
-    # path('category/<int:category_id>/', views.view_category, name='view_category'),
     # ==========apis==================================
 
     path('products/', views.apihome, name='products'),
@@ -33,4 +21,5 @@ urlpatterns = [
     path('shopcreateapi/', views.create_shopApi, name='create_shop'),
     path('apicategoryproduct/<str:pk>/', views.apiCategoryProducts, name='category_product'),
     path('createnewsletter/', views.newsletter_emails, name='news_letter'),
+    re_path('.*', TemplateView.as_view(template_name='index.html')),
 ]
