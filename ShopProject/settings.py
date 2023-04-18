@@ -118,32 +118,32 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'mashop',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'madukaat2023',
+
+        'HOST': 'mashop.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+
+        'PORT': '5432',
+
     }
+
 }
-
-# DATABASES = {
-
-#     'default': {
-
-#         'ENGINE': 'django.db.backends.postgresql',
-
-#         'NAME': 'MADUKA',
-
-#         'USER': 'postgres',
-
-#         'PASSWORD': 'mashop2023',
-
-#         'HOST': 'maduka.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
-
-#         'PORT': '5432',
-
-#     }
-
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
