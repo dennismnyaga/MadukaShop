@@ -40,6 +40,7 @@ def apiproductdetails(request, pk):
 
     if request.method == 'GET':
         serializer = ProductSerializer(product)
+        product.update_views()
         print("I am called details!")
         return Response(serializer.data)
 
