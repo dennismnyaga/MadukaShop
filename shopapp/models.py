@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class ProductCategory(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='category_images', blank=True)
 
@@ -17,7 +17,7 @@ class ProductCategory(models.Model):
 
 
 class Location(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -27,7 +27,7 @@ class Location(models.Model):
 
 
 class ShopCategory(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -35,7 +35,7 @@ class ShopCategory(models.Model):
 
 
 class Shop(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey( User,  on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE)
@@ -50,7 +50,7 @@ class Shop(models.Model):
 
 
 class ShopPhoto(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='shopimages')
     image = models.ImageField(upload_to='product_images')
 
@@ -59,7 +59,7 @@ class ShopPhoto(models.Model):
         return self.shop.name
 
 class Product(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     owner = models.ForeignKey( User,  on_delete=models.CASCADE,  related_name='products')
     ad_title = models.CharField(max_length=200)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
@@ -84,7 +84,7 @@ class Product(models.Model):
 
 
 class ProductImage(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey('Product',  on_delete=models.CASCADE, related_name='images' )
     image = models.ImageField(upload_to='product_images')
     
@@ -97,7 +97,7 @@ class ProductImage(models.Model):
 
 
 class Like(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -110,7 +110,7 @@ class Like(models.Model):
 
 
 class NewsLetterEmails(models.Model):
-    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.CharField(max_length=200)
     time_created = models.DateTimeField(auto_now_add=True)
 
