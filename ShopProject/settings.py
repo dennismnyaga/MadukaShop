@@ -34,7 +34,6 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://madukaonline.co.ke/',
-    'www.madukaonline.co.ke/',
 ]
 # Application definition
 
