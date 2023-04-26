@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer, ImageField, PrimaryKeyRe
 from . models import *
 from rest_framework import serializers
 from django.db import transaction
+from django.db.models import Q
 
 
 class ProductImageSerializer(ModelSerializer):
@@ -16,6 +17,9 @@ class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
+
+
 
 
 class AddProductImageSerializer(serializers.ModelSerializer):
@@ -136,21 +140,9 @@ class NewsLetterEmailsSerializer(serializers.ModelSerializer):
             instance = NewsLetterEmails.objects.create(**validated_data)
             return instance
 
-# class ProductImageSerializer(ModelSerializer):
-#     image = ListField(
-#         child=ImageField(allow_empty_file=False, use_url=True),
-#         required=True
-#     )
-
-#     class Meta:
-#         model = ProductImage
-#         fields = ('id', 'product', 'image')
 
 
-# class ProductSerializer(ModelSerializer):
-#     shop = PrimaryKeyRelatedField(queryset=Shop.objects.all())
-#     location = PrimaryKeyRelatedField(queryset=Location.objects.all())
-#     images = ProductImageSerializer(many=True)
+# class ProductSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model = Product
-#         fields = ('id','ad_title','category','location','description','price','shop','images')
+#         fields = '__all__'

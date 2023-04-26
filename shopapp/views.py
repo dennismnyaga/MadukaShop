@@ -25,11 +25,7 @@ def apihome(request):
     return Response(serializer.data)
 
 
-# @api_view(['GET'])
-# def apiproductdetails(request, pk):
-#     products = Product.objects.get(id=pk)
-#     serializer = ProductSerializer(products, many=False)
-#     return Response(serializer.data)
+
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def apiproductdetails(request, pk):
@@ -41,7 +37,6 @@ def apiproductdetails(request, pk):
     if request.method == 'GET':
         serializer = ProductSerializer(product)
         product.update_views()
-        print("I am called details!")
         return Response(serializer.data)
 
     elif request.method == 'PUT':
@@ -55,6 +50,45 @@ def apiproductdetails(request, pk):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+
+@api_view(['POST'])
+def apiproductlike(request, pk):
+    print(f"This is the like data:  {request.body}")
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    user_id = request.data.get('user_id')
+    if user_id:
+        like, created = Like.objects.get_or_create(product=product, user_id=user_id)
+        if created:
+            return Response({'message': 'Like added successfully!'})
+        else:
+            return Response({'message': 'You have already liked this product!'})
+    else:
+        return Response({'message': 'User ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def apiproductunlike(request, pk):
+    print(f"This is the unlike data:  {request.body}")
+    try:
+        product = Product.objects.get(pk=pk)
+    except Product.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        like = Like.objects.get(product=product, user_id=user_id)
+        like.delete()
+        return Response({'message': 'Like removed successfully!'})
+    except Like.DoesNotExist:
+        return Response({'message': 'You have not liked this product!'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+        
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -145,8 +179,8 @@ def apiShopCategory(request):
 
 
 @api_view(['GET'])
-def apiLike(request):
-    likes = Like.objects.all()
+def apiLike(request, pk):
+    likes = Like.objects.filter(product__pk=pk)
     serializer = LikeSerializer(likes, many=True)
     return Response(serializer.data)
 
@@ -159,3 +193,27 @@ def newsletter_emails(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+
+
+@api_view(['GET'])
+def product_search(request):
+    ad_title = request.query_params.get('ad_title')
+    location = request.query_params.get('location')
+
+    if ad_title is not None and location is not None:
+        products = Product.objects.filter(ad_title__icontains=ad_title, location__name__icontains=location)
+    elif ad_title is not None:
+        products = Product.objects.filter(ad_title__icontains=ad_title)
+    elif location is not None:
+        products = Product.objects.filter(location__name__icontains=location)
+    else:
+        products = Product.objects.none()
+
+    if products.exists():
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data)
+    else:
+        return Response("No such product found in our database")
