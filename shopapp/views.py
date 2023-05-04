@@ -20,7 +20,7 @@ from .serializers import *
 
 @api_view(['GET'])
 def apihome(request):
-    products = Product.objects.all()
+    products = Product.objects.order_by('date_posted')
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -102,6 +102,7 @@ def create_productApi(request):
             serializer.save(owner=request.user, images=images)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
+            print(f'This is the error message {serializer.errors}')
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

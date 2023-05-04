@@ -47,7 +47,7 @@ def register_user(request):
     try:
         user = User.objects.create_user(email=email, password=password, first_name=first_name, last_name=last_name, phone_number=phone_number)
     except Exception as e:
-
-        return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        print(f'this is the error {e}')
+        return Response({'User with this email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
     return Response({'message': 'User created successfully.'}, status=status.HTTP_201_CREATED)

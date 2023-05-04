@@ -16,14 +16,14 @@ urlpatterns = [
     path('shop/', views.apiShop, name='shop'),
     path('shop/<str:pk>/', views.apishopdetails, name='shop_detail'),
     path('shopcategory/', views.apiShopCategory, name='shop_category'),
-    path('likes/<uuid:pk>/', views.apiLike, name='like'),
+    path('likes/<str:pk>/', views.apiLike, name='like'),
     path('createproductsapi/', views.create_productApi, name='create_product'),
     path('shopcreateapi/', views.create_shopApi, name='create_shop'),
     path('apicategoryproduct/<str:pk>/', views.apiCategoryProducts, name='category_product'),
     path('createnewsletter/', views.newsletter_emails, name='news_letter'),
     path('productsearch/', views.product_search, name='product_searchs'),
-    path('productlike/<uuid:pk>/', views.apiproductlike, name='product_like'),
-    path('productunlike/<uuid:pk>', views.apiproductunlike, name='product_unlike'),
+    path('productlike/<str:pk>/', views.apiproductlike, name='product_like'),
+    path('productunlike/<str:pk>', views.apiproductunlike, name='product_unlike'),
     # re_path('.*', TemplateView.as_view(template_name='index.html')),
     
 ]

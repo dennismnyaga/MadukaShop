@@ -34,7 +34,7 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://madukaonline.co.ke/',
-    'www.madukaonline.co.ke/',
+    'http://localhost:3000'
 ]
 # Application definition
 
@@ -128,6 +128,8 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 # }
 
 
+"""===============================Start of Production database configuration=============================="""
+
 DATABASES = {
     'default': {
 
@@ -146,6 +148,33 @@ DATABASES = {
     }
 
 }
+"""=====================================End of Product database configuration============================================== """
+
+
+"""============================Start of Local Database Configuration========================================================"""
+
+# DATABASES = {
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+
+#         'NAME': 'MadukaShop',
+
+#         'USER': 'postgres',
+
+#         'PASSWORD': '33016460d',
+
+#         'HOST': 'localhost',
+
+#         'PORT': '5432',
+        
+
+#     }
+
+# }
+
+
+""" =============================End of Local Database Configuration==================================== """
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -188,15 +217,22 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
-
+""" =============================Production AWS Storages================================= """
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_QUERYSTRING_AUTH = False
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
 AWS_SECRET_ACCESS_KEY = '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'
 
 AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
+
+
+
+
+"""============================End of production AWS settings=========================== """
+
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -232,15 +268,12 @@ AUTH_USER_MODEL = 'ShopUser.CustomUser'
 
 
 
-
-CORS_ALLOWED_ORIGINS = [
-    'https://madukaonline.co.ke'
-]
 CORS_ALLOW_CREDENTIALS: True
 
-
-
-
+CORS_ALLOWED_ORIGINS = [
+    'https://www.madukaonline.co.ke',
+    'http://localhost:3000',
+]
 
 
 
