@@ -217,4 +217,4 @@ def product_search(request):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
     else:
-        return Response("No such product found in our database")
+        return Response({'error': 'No such product found in our database'}, status=status.HTTP_404_NOT_FOUND)
