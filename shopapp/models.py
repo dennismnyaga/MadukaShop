@@ -64,7 +64,7 @@ class Product(models.Model):
     ad_title = models.CharField(max_length=500)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    description = models.TextField(max_length=3000)
+    description = models.TextField()
     price = models.DecimalField(max_digits=100, decimal_places=2)
     date_posted = models.DateTimeField(auto_now_add=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)

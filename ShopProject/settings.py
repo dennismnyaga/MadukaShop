@@ -42,6 +42,7 @@ CSRF_TRUSTED_ORIGINS = [
 INSTALLED_APPS = [
     'shopapp',
     'ShopUser',
+    'cms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,11 +69,14 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
+    'django_seo_js',
 ]
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
+    'django_seo_js.middleware.UserAgentMiddleware',# If you want to detect by user agent
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     "corsheaders.middleware.CorsMiddleware",
@@ -84,6 +88,8 @@ MIDDLEWARE = [
 
     # "django.middleware.common.CommonMiddleware",
 ]
+
+
 
 ROOT_URLCONF = 'ShopProject.urls'
 
@@ -148,6 +154,8 @@ DATABASES = {
     }
 
 }
+
+
 """=====================================End of Product database configuration============================================== """
 
 
@@ -218,6 +226,8 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
 """ =============================Production AWS Storages================================= """
+
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_QUERYSTRING_AUTH = False
 
@@ -272,7 +282,7 @@ CORS_ALLOW_CREDENTIALS: True
 
 CORS_ALLOWED_ORIGINS = [
     'https://madukaonline.co.ke',
-    # 'http://localhost:3000'
+    'www.madukaonline.co.ke',
 ]
 
 

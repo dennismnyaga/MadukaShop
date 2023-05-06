@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('shopapp.urls')),
     path('users/', include('ShopUser.urls')),
     path('accounts/', include('allauth.urls')),
+    path('cms/', include('cms.urls')),
     
 ]
 
