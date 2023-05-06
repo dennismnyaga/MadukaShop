@@ -282,7 +282,6 @@ CORS_ALLOW_CREDENTIALS: True
 
 CORS_ALLOWED_ORIGINS = [
     'https://madukaonline.co.ke',
-    'www.madukaonline.co.ke',
 ]
 
 
