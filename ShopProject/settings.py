@@ -136,42 +136,42 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 
 """===============================Start of Production database configuration=============================="""
 
-DATABASES = {
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'production-maduka-db-1 ',
-
-        'USER': 'postgres',
-
-        'PASSWORD': 'logicaltender2023',
-
-        'HOST': 'production-maduka-db-1.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
-
-        'PORT': '5432',
-
-    }
-
-}
 # DATABASES = {
 #     'default': {
 
 #         'ENGINE': 'django.db.backends.postgresql',
 
-#         'NAME': 'mashop',
+#         'NAME': 'production-maduka-db-1 ',
 
 #         'USER': 'postgres',
 
-#         'PASSWORD': 'madukaat2023',
+#         'PASSWORD': 'logicaltender2023',
 
-#         'HOST': 'mashop.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+#         'HOST': 'production-maduka-db-1.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
 
 #         'PORT': '5432',
 
 #     }
 
 # }
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'mashop',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'madukaat2023',
+
+        'HOST': 'mashop.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+
+        'PORT': '5432',
+
+    }
+
+}
 
 
 """=====================================End of Product database configuration============================================== """
