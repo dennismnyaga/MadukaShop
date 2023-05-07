@@ -136,6 +136,24 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 
 """===============================Start of Production database configuration=============================="""
 
+DATABASES = {
+    'default': {
+
+        'ENGINE': 'django.db.backends.postgresql',
+
+        'NAME': 'production-maduka-db-1 ',
+
+        'USER': 'postgres',
+
+        'PASSWORD': 'logicaltender2023',
+
+        'HOST': 'production-maduka-db-1.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+
+        'PORT': '5432',
+
+    }
+
+}
 # DATABASES = {
 #     'default': {
 
@@ -161,25 +179,25 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 
 """============================Start of Local Database Configuration========================================================"""
 
-DATABASES = {
-    'default': {
+# DATABASES = {
+#     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql',
+#         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'MadukaShop',
+#         'NAME': 'MadukaShop',
 
-        'USER': 'postgres',
+#         'USER': 'postgres',
 
-        'PASSWORD': '33016460d',
+#         'PASSWORD': '33016460d',
 
-        'HOST': 'localhost',
+#         'HOST': 'localhost',
 
-        'PORT': '5432',
+#         'PORT': '5432',
         
 
-    }
+#     }
 
-}
+# }
 
 
 """ =============================End of Local Database Configuration==================================== """
@@ -228,13 +246,13 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 """ =============================Production AWS Storages================================= """
 
 
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_QUERYSTRING_AUTH = False
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_QUERYSTRING_AUTH = False
 
-# AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
-# AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
+AWS_SECRET_ACCESS_KEY = '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'
 
-# AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
+AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
 
 
 
