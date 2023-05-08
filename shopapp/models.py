@@ -40,7 +40,7 @@ class Shop(models.Model):
     name = models.CharField(max_length=200)
     category = models.ForeignKey(ShopCategory, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    description = models.TextField()
+    description = models.CharField(max_length=20000)
     registered_on = models.DateTimeField(auto_now_add=True)
    
 
@@ -64,7 +64,7 @@ class Product(models.Model):
     ad_title = models.CharField(max_length=500)
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    description = models.TextField()
+    description =  models.CharField(max_length=20000)
     price = models.DecimalField(max_digits=100, decimal_places=2)
     date_posted = models.DateTimeField(auto_now_add=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
