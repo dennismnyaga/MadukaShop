@@ -34,7 +34,7 @@ DEBUG = True
 
 CSRF_TRUSTED_ORIGINS = [
     'https://madukaonline.co.ke',
-    # 'http://localhost:3000'
+    'http://localhost:3000'
 ]
 # Application definition
 
@@ -300,6 +300,7 @@ CORS_ALLOW_CREDENTIALS: True
 
 CORS_ALLOWED_ORIGINS = [
     'https://madukaonline.co.ke',
+    'http://localhost:3000'
 ]
 
 
