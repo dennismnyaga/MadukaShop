@@ -30,12 +30,12 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['https://madukashop-production.up.railway.app',
 #                  'https://madukashop-production.up.railway.app/admin/login/']
-# CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/admin/login/']
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://madukaonline.co.ke',
-#     'http://localhost:3000'
-# ]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://madukaonline.co.ke',
+    'http://localhost:3000'
+]
 # Application definition
 
 
@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 
     'phonenumber_field',
-    # 'CustomUser',
     'django_filters',
     'rest_framework',
     
@@ -73,25 +72,12 @@ INSTALLED_APPS = [
 ]
 
 
-# MIDDLEWARE = [
-#     'django.middleware.security.SecurityMiddleware',
-#     'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
-#     'django_seo_js.middleware.UserAgentMiddleware',# If you want to detect by user agent
-#     "corsheaders.middleware.CorsMiddleware",
-#     'django.middleware.common.CommonMiddleware',
-#     'django.middleware.csrf.CsrfViewMiddleware',
-#     'django.contrib.auth.middleware.AuthenticationMiddleware',
-#     'django.contrib.messages.middleware.MessageMiddleware',
-#     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-
-#     # "django.middleware.common.CommonMiddleware",
-# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
-    'django_seo_js.middleware.UserAgentMiddleware',  # If you want to detect by user agent
+    # 'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
+    # 'django_seo_js.middleware.UserAgentMiddleware',  # If you want to detect by user agent
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
