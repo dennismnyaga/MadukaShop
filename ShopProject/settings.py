@@ -301,6 +301,7 @@ CORS_ALLOW_CREDENTIALS: True
 CORS_ALLOWED_ORIGINS = [
     'https://madukaonline.co.ke',
     'http://localhost:3000'
+    
 ]
 
 
