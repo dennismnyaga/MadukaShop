@@ -32,10 +32,10 @@ DEBUG = True
 #                  'https://madukashop-production.up.railway.app/admin/login/']
 # CSRF_TRUSTED_ORIGINS = ['https://madukashop-production.up.railway.app/admin/login/']
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://madukaonline.co.ke',
-    'http://localhost:3000'
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://madukaonline.co.ke',
+#     'http://localhost:3000'
+# ]
 # Application definition
 
 
@@ -311,8 +311,8 @@ AUTH_USER_MODEL = 'ShopUser.CustomUser'
 CORS_ALLOW_CREDENTIALS: True
 
 CORS_ALLOWED_ORIGINS = [
-    'https://madukaonline.co.ke',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'https://madukaonline.co.ke'
     
 ]
 
