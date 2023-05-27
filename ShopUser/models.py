@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
@@ -23,7 +24,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     phone_number = models.CharField(max_length=30)
-    profile_pic = models.ImageField(upload_to = 'user_images', null=True, blank=True, default='samuele-bertoli-C0gX9PFh07Q-unsplash.jpg')
+    profile_pic = models.ImageField(upload_to = 'user_images', null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 

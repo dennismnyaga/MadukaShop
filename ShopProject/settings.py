@@ -15,6 +15,11 @@ from pathlib import Path
 from datetime import timedelta
 
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -69,6 +74,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_seo_js',
+    'django.contrib.postgres',
+    
 ]
 
 
@@ -76,8 +83,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
-    # 'django_seo_js.middleware.UserAgentMiddleware',  # If you want to detect by user agent
+    'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
+    'django_seo_js.middleware.UserAgentMiddleware',  # If you want to detect by user agent
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -157,13 +164,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'mashop',
+        'NAME': 'postgres',
 
         'USER': 'postgres',
 
-        'PASSWORD': 'madukaat2023',
+        'PASSWORD': 'mashopat2023',
 
-        'HOST': 'mashop.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+        'HOST': '130.211.119.56',
 
         'PORT': '5432',
 
@@ -244,13 +251,27 @@ MEDIA_ROOT = BASE_DIR / 'static/images'
 """ =============================Production AWS Storages================================= """
 
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_QUERYSTRING_AUTH = False
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_QUERYSTRING_AUTH = False
 
-AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
-AWS_SECRET_ACCESS_KEY = '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'
+# AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
+# AWS_SECRET_ACCESS_KEY = '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'
 
-AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
+# AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
+# cloudinary.config( 
+#   cloud_name = "dndmmeamv", 
+#   api_key = "428545661642991", 
+#   api_secret = "RtEx_nhEyw5QAkWTndWxP9jvx8g" 
+# )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dndmmeamv',
+    'API_KEY': '428545661642991',
+    'API_SECRET': 'RtEx_nhEyw5QAkWTndWxP9jvx8g',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 
 

@@ -10,6 +10,10 @@ class ProductImageSerializer(ModelSerializer):
         model = ProductImage
         fields = ['id', 'image']
 
+class LocationSerializer(ModelSerializer):
+    class Meta:
+        model = Location
+        fields = '__all__'
 
 class ProductSerializer(ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
@@ -33,15 +37,26 @@ class AddProductImageSerializer(serializers.ModelSerializer):
 
 class AddProductSerializer(serializers.ModelSerializer):
     images = AddProductImageSerializer(many=True, required=False)
+    # location = LocationSerializer(required=False)
+    location = serializers.CharField()
 
     class Meta:
         model = Product
-        fields = ('id', 'ad_title', 'category', 'location',
-                  'description', 'price',  'shop',  'images')
+        fields = ('id', 'ad_title', 'category', 'location', 'description', 'price',  'shop',  'images')
+
+
 
     def create(self, validated_data):
+        print(f"Validated Data {validated_data}")
         images_data = validated_data.pop('images', [])
-        print(f"This are the images: {images_data}")
+        location_data = validated_data.pop('location', None)
+        print(f"Location name is {location_data}")
+        if location_data:
+            location = Location.objects.filter(name=location_data).first()
+            if not location:
+                location = Location.objects.create(name = location_data)
+            validated_data['location'] = location
+      
         product = Product.objects.create(**validated_data)
         print(f"Product created with id: {product.id}")
         for image_data in images_data:
@@ -67,8 +82,8 @@ class ShopSerializer(ModelSerializer):
 
 
 class AddShopImageSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(
-        max_length=None, allow_empty_file=False, use_url=True)
+    image = serializers.ImageField(max_length=None, allow_empty_file=False, use_url=True)
+    
 
     class Meta:
         model = ShopPhoto
@@ -77,6 +92,7 @@ class AddShopImageSerializer(serializers.ModelSerializer):
 
 class AddShopSerializer(serializers.ModelSerializer):
     shopimages = AddShopImageSerializer(many=True, required=False)
+    location = serializers.CharField()
 
     class Meta:
         model = Shop
@@ -85,12 +101,20 @@ class AddShopSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         images_data = validated_data.pop('shopimages', [])
-        print(f"This is the images data {images_data}")
+        location_data = validated_data.pop('location', None)
+        if location_data:
+            location = Location.objects.filter(name=location_data).first()
+            if not location:
+                location = Location.objects.create(name = location_data)
+            validated_data['location'] = location
         shop = Shop.objects.create(**validated_data)
         for image_data in images_data:
             image_dict = {'image': image_data}
             shop_image = ShopPhoto.objects.create(shop=shop,  **image_dict)
         return shop
+
+
+
 
 
 class CategorySerializer(ModelSerializer):
@@ -108,10 +132,7 @@ class ProductCategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class LocationSerializer(ModelSerializer):
-    class Meta:
-        model = Location
-        fields = '__all__'
+
 
 
 class ShopCategorySerializer(ModelSerializer):

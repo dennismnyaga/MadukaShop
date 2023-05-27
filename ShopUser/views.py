@@ -25,16 +25,70 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view(['GET'])
-def apiuserhome(request):
-    users = CustomUser.objects.all()
-    serializer = UserSerializer(users, many=True)
-    return Response(serializer.data)
+@api_view(['GET','PUT'])
+def apiuserhome(request, user_id=None):
+    if request.method == 'GET':
+        if user_id is not None:
+            try:
+                user = CustomUser.objects.get(id=user_id)
+                serializer = UserSerializer(user, many=True)
+                return Response(serializer.data)
+            except CustomUser.DoesNotExist:
+                return Response({'error': 'User not found'}, status=404)
+        else:
+            users = CustomUser.objects.all()
+            serializer = UserSerializer(users, many=True)
+            return Response(serializer.data)
+    elif request.method == 'PUT':
+        user_id = request.data.get('user_id')
+        is_active = request.data.get('is_active')
+        print(f"is active status is {is_active}")
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            user.is_active = is_active
+            user.save()
+            return Response({'message':'User verification updated successfully'})
+        except User.DoesNotExist:
+            return Response({'error':'User not found'}, status=404)
+    else:
+        return Response({"error":"Invalid request method"}, status=405)
 
+
+
+
+
+
+# @api_view(['GET', 'PUT'])
+# def apidashShop(request, shop_id=None):
+#     if request.method == 'GET':
+#         if shop_id is not None:
+#             try:
+#                 shop = Shop.objects.get(id=shop_id)
+#                 serializer = ShopSerializer(shop)
+#                 return Response(serializer.data)
+#             except Shop.DoesNotExist:
+#                 return Response({'error': 'Shop not found'}, status=404)
+#         else:
+#             shop = Shop.objects.all()
+#             serializer = ShopSerializer(shop, many=True)
+#             return Response(serializer.data)
+#     elif request.method == 'PUT':
+#         shop_id = request.data.get('shop_id')
+#         is_verified = request.data.get('is_verified')
+#         try:
+#             shop = Shop.objects.get(id=shop_id)
+#             shop.is_verified = is_verified
+#             shop.save()
+#             return Response({'message':'User verification updated successfully'})
+#         except Shop.DoesNotExist:
+#             return Response({'error':'User not found'}, status=404)
+#     else:
+#         return Response({"error":"Invalid request methos"}, status=405)
 
 
 @api_view(['POST'])
 def register_user(request):
+    print("am called logout")
     email = request.data.get('email')
     password = request.data.get('password')
     first_name = request.data.get('first_name')

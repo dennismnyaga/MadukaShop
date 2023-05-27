@@ -20,7 +20,7 @@ from .serializers import *
 
 @api_view(['GET'])
 def apihome(request):
-    products = Product.objects.order_by('date_posted')
+    products = Product.objects.filter(is_verified=True).order_by('date_posted')
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -97,6 +97,7 @@ def create_productApi(request):
         print(f"This is the response data: {request.data}")
         serializer = AddProductSerializer(
             data=request.data, context={'request': request})
+            
         if serializer.is_valid():
             images = request.FILES.getlist('images')
             serializer.save(owner=request.user, images=images)
@@ -160,7 +161,7 @@ def apiLocation(request):
 
 @api_view(['GET'])
 def apiShop(request):
-    shop = Shop.objects.all()
+    shop = Shop.objects.filter(is_verified=True).all()
     serializer = ShopSerializer(shop, many=True)
     return Response(serializer.data)
 
