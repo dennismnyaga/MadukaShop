@@ -36,7 +36,7 @@ class Shop(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     description = models.TextField()
     registered_on = models.DateTimeField(auto_now_add=True)
-    is_verified = models.BooleanField(default=False)
+    # is_verified = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -67,7 +67,7 @@ class Product(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, related_name='liked_products', through='Like')
     views = models.PositiveIntegerField(default=0)
-    is_verified = models.BooleanField(default=False)
+    # is_verified = models.BooleanField(default=False)
 
 
 
