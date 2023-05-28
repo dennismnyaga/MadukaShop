@@ -159,24 +159,24 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 #     }
 
 # }
-DATABASES = {
-    'default': {
+# DATABASES = {
+#     'default': {
 
-        'ENGINE': 'django.db.backends.postgresql',
+#         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'postgres',
+#         'NAME': 'postgres',
 
-        'USER': 'postgres',
+#         'USER': 'postgres',
 
-        'PASSWORD': 'mashopat2023',
+#         'PASSWORD': 'mashopat2023',
 
-        'HOST': '130.211.119.56',
+#         'HOST': '130.211.119.56',
 
-        'PORT': '5432',
+#         'PORT': '5432',
 
-    }
+#     }
 
-}
+# }
 
 
 """=====================================End of Product database configuration============================================== """
@@ -184,25 +184,25 @@ DATABASES = {
 
 """============================Start of Local Database Configuration========================================================"""
 
-# DATABASES = {
-#     'default': {
+DATABASES = {
+    'default': {
 
-#         'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql',
 
-#         'NAME': 'MadukaShop',
+        'NAME': 'MadukaShop',
 
-#         'USER': 'postgres',
+        'USER': 'postgres',
 
-#         'PASSWORD': '33016460d',
+        'PASSWORD': '33016460d',
 
-#         'HOST': 'localhost',
+        'HOST': 'localhost',
 
-#         'PORT': '5432',
+        'PORT': '5432',
         
 
-#     }
+    }
 
-# }
+}
 
 
 """ =============================End of Local Database Configuration==================================== """
