@@ -117,23 +117,60 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ShopProject.wsgi.application'
 
 
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': '1cHGQ3TnjKfL8gWocriA',
+#         'HOST': 'containers-us-west-40.railway.app',
+#         'PORT': '6298',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
 
 
 """===============================Start of Production database configuration=============================="""
 
+# DATABASES = {
+#     'default': {
 
+#         'ENGINE': 'django.db.backends.postgresql',
+
+#         'NAME': 'production-maduka-db-1 ',
+
+#         'USER': 'postgres',
+
+#         'PASSWORD': 'logicaltender2023',
+
+#         'HOST': 'production-maduka-db-1.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+
+#         'PORT': '5432',
+
+#     }
+
+# }
 DATABASES = {
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'postgres',
+        'NAME': 'dddr1k0ajs2eqc',
 
-        'USER': 'postgres',
+        'USER': 'qykgkkkfzuvooh',
 
-        'PASSWORD': 'mashopat2023',
+        'PASSWORD': '5db49db60c6584b81a168bb578cb52a4ee8c4c52ce352a7f46a6d919393779b6',
 
-        'HOST': '130.211.119.56',
+        'HOST': 'ec2-3-232-103-50.compute-1.amazonaws.com',
 
         'PORT': '5432',
 
