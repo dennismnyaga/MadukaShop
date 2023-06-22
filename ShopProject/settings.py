@@ -164,13 +164,13 @@ DATABASES = {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'dddr1k0ajs2eqc',
+        'NAME': 'dcbrdcbr4jhn1a',
 
-        'USER': 'qykgkkkfzuvooh',
+        'USER': 'sniintluvatrjt',
 
-        'PASSWORD': '5db49db60c6584b81a168bb578cb52a4ee8c4c52ce352a7f46a6d919393779b6',
+        'PASSWORD': '6d80b4c471b55499e3531182b05eda1ead8b73878dce249a96eaccf178ee4e47',
 
-        'HOST': 'ec2-3-232-103-50.compute-1.amazonaws.com',
+        'HOST': 'ec2-54-205-67-130.compute-1.amazonaws.com',
 
         'PORT': '5432',
 
@@ -320,7 +320,7 @@ CORS_ALLOW_CREDENTIALS: True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://madukaonline.co.ke',
-    'https://base.madukaonline.co.ke/'
+    'https://base.madukaonline.co.ke'
     
 ]
 
