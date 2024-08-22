@@ -14,4 +14,7 @@ urlpatterns = [
     path('users/<str:user_id>/', views.apiuserhome, name='users'),
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('password-reset/', views.password_reset),
+    path('sendOtp/', views.send_otp),
+    path('verifyotp/',views.verifyOtp),
 ]

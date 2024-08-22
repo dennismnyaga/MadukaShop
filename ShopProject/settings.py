@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import django_heroku
 from pathlib import Path
 from datetime import timedelta
-
+from dotenv import load_dotenv
+import os
 
 import cloudinary
 import cloudinary.uploader
@@ -23,7 +24,7 @@ import cloudinary.api
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+load_dotenv()
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -83,8 +84,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django_seo_js.middleware.EscapedFragmentMiddleware',  # If you're using #!
-    'django_seo_js.middleware.UserAgentMiddleware',  # If you want to detect by user agent
+    'django_seo_js.middleware.EscapedFragmentMiddleware', 
+    'django_seo_js.middleware.UserAgentMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -120,23 +121,25 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'railway',
 #         'USER': 'postgres',
-#         'PASSWORD': '1cHGQ3TnjKfL8gWocriA',
-#         'HOST': 'containers-us-west-40.railway.app',
-#         'PORT': '6298',
+#         'PASSWORD': os.getenv('RAILWAYDATABASEPASSWORD')
+#         'HOST': os.getenv('RAILWAYDATABASEHOST'),
+#         'PORT': os.getenv('RAILWAYDATABASEPORT'),
 #     }
 # }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'mydatabase',
-#     }
-# }
 
 
 """===============================Start of Production database configuration=============================="""
@@ -146,66 +149,23 @@ WSGI_APPLICATION = 'ShopProject.wsgi.application'
 
 #         'ENGINE': 'django.db.backends.postgresql',
 
-#         'NAME': 'production-maduka-db-1 ',
+#         'NAME': os.getenv('AWS_DATABASE_NAME'),
 
-#         'USER': 'postgres',
+#         'USER': os.getenv('AWS_DATABASE_USER'),
 
-#         'PASSWORD': 'logicaltender2023',
+#         'PASSWORD': os.getenv('AWS_DATABASE_PASSWORD'),
 
-#         'HOST': 'production-maduka-db-1.ckp6xx54qapt.eu-central-1.rds.amazonaws.com',
+#         'HOST': os.getenv('AWS_DATABASE_HOST'),
 
-#         'PORT': '5432',
+#         'PORT': os.getenv('AWS_DATABASE_POST'),
 
 #     }
 
 # }
-DATABASES = {
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'dcbrdcbr4jhn1a',
-
-        'USER': 'sniintluvatrjt',
-
-        'PASSWORD': '6d80b4c471b55499e3531182b05eda1ead8b73878dce249a96eaccf178ee4e47',
-
-        'HOST': 'ec2-54-205-67-130.compute-1.amazonaws.com',
-
-        'PORT': '5432',
-
-    }
-
-}
 
 
 """=====================================End of Product database configuration============================================== """
 
-
-"""============================Start of Local Database Configuration========================================================"""
-
-# DATABASES = {
-#     'default': {
-
-#         'ENGINE': 'django.db.backends.postgresql',
-
-#         'NAME': 'MadukaShop',
-
-#         'USER': 'postgres',
-
-#         'PASSWORD': '33016460d',
-
-#         'HOST': 'localhost',
-
-#         'PORT': '5432',
-        
-
-#     }
-
-# }
-
-
-""" =============================End of Local Database Configuration==================================== """
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -248,26 +208,12 @@ MEDIA_URL = '/images/'
 
 MEDIA_ROOT = BASE_DIR / 'static/images'
 
-""" =============================Production AWS Storages================================= """
 
-
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# AWS_QUERYSTRING_AUTH = False
-
-# AWS_ACCESS_KEY_ID = 'AKIA53IMYZT7SVG7XVSR'
-# AWS_SECRET_ACCESS_KEY = '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'
-
-# AWS_STORAGE_BUCKET_NAME = 'maduka-shop'
-# cloudinary.config( 
-#   cloud_name = "dndmmeamv", 
-#   api_key = "428545661642991", 
-#   api_secret = "RtEx_nhEyw5QAkWTndWxP9jvx8g" 
-# )
 
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'dndmmeamv',
-    'API_KEY': '428545661642991',
-    'API_SECRET': 'RtEx_nhEyw5QAkWTndWxP9jvx8g',
+    'CLOUD_NAME': os.getenv('CLOUDINARY_NAME'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
@@ -285,7 +231,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 
 AUTHENTICATION_BACKENDS = [
@@ -303,8 +249,8 @@ SOCIALACCOUNT_PROVIDERS = {
     'google': {
 
         'APP': {
-            'client_id': '123',
-            'secret': '456',
+            'client_id': os.getenv('SOCIAL_ACCOUNT_PROVIDER_CLIENT_ID'),
+            'secret': os.getenv('SOCIAL_ACCOUNT_PROVIDER_secret'),
             'key': ''
         }
     }
@@ -385,5 +331,14 @@ SIMPLE_JWT = {
 }
 
 
+SEO_JS_PRERENDER_TOKEN = os.getenv('SEO_JS_PRERENDER_TOKE')
 
-SEO_JS_PRERENDER_TOKEN = "123456789abcdefghijkl"  # Really, put this in your env, not your codebase.
+
+
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')

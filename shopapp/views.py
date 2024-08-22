@@ -21,6 +21,7 @@ from .serializers import *
 @api_view(['GET'])
 def apihome(request):
     products = Product.objects.filter(is_verified=True).order_by('date_posted')
+    print(products)
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
 
@@ -54,7 +55,6 @@ def apiproductdetails(request, pk):
 
 @api_view(['POST'])
 def apiproductlike(request, pk):
-    print(f"This is the like data:  {request.body}")
     try:
         product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
@@ -71,9 +71,11 @@ def apiproductlike(request, pk):
         return Response({'message': 'User ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['DELETE'])
-def apiproductunlike(request, pk):
-    print(f"This is the unlike data:  {request.body}")
+@api_view(['POST'])
+def apiproductunlike(request):
+    pk = request.data.get('product_id')
+    user_id = request.data.get('user_id')
+    
     try:
         product = Product.objects.get(pk=pk)
     except Product.DoesNotExist:
@@ -101,6 +103,7 @@ def create_productApi(request):
         if serializer.is_valid():
             images = request.FILES.getlist('images')
             serializer.save(owner=request.user, images=images)
+            print('Response data ', serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             print(f'This is the error message {serializer.errors}')
@@ -179,12 +182,27 @@ def apiShopCategory(request):
     serializer = ShopCategorySerializer(shopcategory, many=True)
     return Response(serializer.data)
 
+@api_view(['POST'])
+def apiLike(request):
+    user_who_liked = request.data.get('user_id')
+    pk = request.data.get('productId')
+    likes = Like.objects.filter(product__pk=pk, user=user_who_liked)
 
-@api_view(['GET'])
-def apiLike(request, pk):
-    likes = Like.objects.filter(product__pk=pk)
-    serializer = LikeSerializer(likes, many=True)
-    return Response(serializer.data)
+    # Check if there are any likes for the given product and user
+    if likes.exists():
+        return Response({'has_likes': True}, status=status.HTTP_200_OK)
+    else:
+        return Response({'has_likes': False}, status=status.HTTP_200_OK)
+    
+    
+# @api_view(['POST'])
+# def apiLike(request):
+#     user_who_liked = request.data.get('user_id')
+#     pk = request.data.get('productId')
+#     likes = Like.objects.filter(product__pk=pk, user=user_who_liked)
+#     serializer = LikeSerializer(likes, many=True)
+    
+#     return Response(serializer.data)
 
 
 
