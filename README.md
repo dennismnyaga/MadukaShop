@@ -158,68 +158,38 @@ GET /products/ - Retrieve a list of all the products
 ```bash
 [
     {
-        "id": 1,
+        "id": product ID,
         "images": [
             {
-                "id": 1,
-                "image": "https://res.cloudinary.com/dndmmeamv/raw/upload/v1/images/product_images/425275967_350963471252612_8093914443767549707_n_kyxpki.jpg"
+                "id": image1 ID,
+                "image": "image1 url"
             },
             {
-                "id": 5,
-                "image": "https://res.cloudinary.com/dndmmeamv/raw/upload/v1/images/product_images/7io30qysok731_eygd50.jpg"
+                "id": image2 ID,
+                "image": "image2 url"
             }
         ],
-        "ad_title": "Coffee Table",
-        "description": "Built with the best wood",
-        "price": "12000.00",
-        "date_posted": "2024-03-25T12:58:18.543721Z",
-        "views": 112,
-        "is_verified": true,
-        "owner": 1,
-        "category": 1,
-        "location": 1,
-        "shop": 1,
+        "ad_title": "product title name",
+        "description": "product description",
+        "price": "product price",
+        "date_posted": "date the product was posted",
+        "views": number of product views,
+        "is_verified": boolean value,
+        "owner": product owners ID,
+        "category": Category ID,
+        "location": Location ID,
+        "shop": Shop ID,
         "likes": [
-            1
+            likes count
         ]
     },
-    {
-        "id": 2,
-        "images": [
-            {
-                "id": 2,
-                "image": "https://res.cloudinary.com/dndmmeamv/raw/upload/v1/images/product_images/maxim-shklyaev-1oGP7-k3zvI-unsplash_gsjrwu.jpg"
-            },
-            {
-                "id": 3,
-                "image": "https://res.cloudinary.com/dndmmeamv/raw/upload/v1/images/product_images/patrick-langwallner-jWUrHPZjtoQ-unsplash_qytngl.jpg"
-            },
-            {
-                "id": 4,
-                "image": "https://res.cloudinary.com/dndmmeamv/raw/upload/v1/images/product_images/martin-sanchez-PnD5d2XTkl4-unsplash_hfmwa2.jpg"
-            }
-        ],
-        "ad_title": "King Size Bed",
-        "description": "The best bed with 6x6 king size bed",
-        "price": "25000.00",
-        "date_posted": "2024-03-25T14:32:46.036975Z",
-        "views": 250,
-        "is_verified": true,
-        "owner": 1,
-        "category": 1,
-        "location": 2,
-        "shop": 1,
-        "likes": [
-            1,
-            2
-        ]
-    },
+    
    
 ]
 ```
 
 ## Fetching a Single Product(Product Details)
-GET /products/pk/ - Retrieve a list of all the products
+GET /products/pk/ - Retrieve a single product details
 
 ### Response
 
@@ -240,13 +210,15 @@ GET /products/pk/ - Retrieve a list of all the products
     "description": "product descripton",
     "price": "product price",
     "date_posted": "the date the product was posted",
-    "views": 3,
-    "is_verified": true,
-    "owner": 1,
-    "category": 1,
-    "location": 4,
-    "shop": 1,
-    "likes": []
+    "views": number of views,
+    "is_verified": boolean value,
+    "owner": product owners ID,
+    "category": product category ID,
+    "location": Product Geographical Location ID,
+    "shop": Product Shop,
+    "likes": [
+        likes counts
+        ]
 }
 ```
 
@@ -256,18 +228,17 @@ POST /createproductsapi/ - Create a new product (requires authentication)
 ### Request Body
 The category should be the ID of the categories from the DB
 
-
 The shop should be the ID of the authenticated users shop
 
 ```bash
 {
-    "category":"1",
-    "location": "Nairobi",
+    "category":"Select product category",
+    "location":"Location ID",
     "images":[imeage1, image2],
-    "ad_title":"HP Pavilion",
+    "ad_title":"product name",
     "price":"520",
-    "description":"very good, and it refurbished",
-    "shop":"1"
+    "description":"product description",
+    "shop":"shop ID"
 }
 ```
 
@@ -349,24 +320,202 @@ the response for success is a 200 ok
 
 
 
-Orders
+## Fetching all shops
+GET /shop/ - Retrieve a list of all the shops
 
-GET /api/orders/ - Retrieve a list of orders (requires authentication)
-POST /api/orders/ - Create a new order (requires authentication)
-Contributing
+#### Response
+
+```bash
+[
+    {
+        "id": shop ID,
+        "images": [
+            {
+                "id": image1 ID,
+                "image": "image1 url"
+            },
+            {
+                "id": image2 ID,
+                "image": "image2 url"
+            }
+        ],
+        "name": "shop name",
+        "description": "shop description",
+        "registered_o": "date the shop was created",
+        "is_verified": boolean value,
+        "owner": shop owners ID,
+        "category": Category ID,
+        "location": Location ID,
+    },
+    
+   
+]
+```
+
+## Fetching a Single Shop(shop Details)
+GET /shop/pk/ - Retrieve a single shop details
+
+### Response
+
+```bash
+{
+    "id": shop ID,
+        "images": [
+            {
+                "id": image1 ID,
+                "image": "image1 url"
+            },
+            {
+                "id": image2 ID,
+                "image": "image2 url"
+            }
+        ],
+        "name": "shop name",
+        "description": "shop description",
+        "registered_o": "date the shop was created",
+        "is_verified": boolean value,
+        "owner": shop owners ID,
+        "category": Category ID,
+        "location": Location ID,
+}
+```
+
+
+## Posting a Shop
+POST /shopcreateapi/ - Create a new shop (requires authentication)
+### Request Body
+The category should be the ID of the categories from the DB
+
+
+
+```bash
+{
+    "category":"Select product category",
+    "location":"Location ID",
+    "images":[imeage1, image2],
+    "name":"shop name",
+    "description":"shop description",
+}
+```
+
+### Response
+
+```bash
+{
+    "id": 3,
+    "images": [
+        {
+            "id": image1 ID,
+            "image": "image1 url"
+        },
+        {
+            "id": image2 ID,
+            "image": "image2 url"
+        },
+    ],
+    "name": "shop name",
+    "description": 'shop description',
+    "is_verified": boolean value,
+    "owner": id of the shop owner,
+    "category": 'category Id the shop belongs',
+    "location": 'location ID',
+}
+```
+
+# Locations
+
+## Fetching all the geographical locations
+GET /location/ - Retrieve a list of all the geographical locations
+
+
+### Response
+
+```bash
+[
+    {
+        "id": 1,
+        "name": "laction name"
+    },
+    {
+        "id": 2,
+        "name": "location name"
+    },
+    {
+        "id": 3,
+        "name": "location name"
+    },
+    {
+        "id": 4,
+        "name": "Location name"
+    }
+]
+```
+
+
+# Category
+
+## Fetching all the product Category
+
+GET /productcategory/ - Retrieve a list of all the product categories
+
+### Response 
+```bash
+[
+    {
+        "id": product category ID,
+        "name": "product category name",
+        "image": "product category icon url"
+    }
+]
+```
+
+
+## Fetching all the shop Category
+
+GET /shopcategory/ - Retrieve a list of all the shop categories
+
+### Response 
+```bash
+[
+    {
+        "id": shop category ID,
+        "name": "shop category name",
+        "image": "shop category icon url"
+    }
+]
+```
+# News Letter
+## Creating a newsletter
+POST /createnewsletter/ - creating a new newsletter
+
+### Request Body
+
+```bash
+{
+    'email': 'your email'
+}
+```
+
+### Response Body
+
+```bash
+{
+    'id': news letter ID,
+    'email': 'your email',
+    'time_created': 'time the the letter is created'
+}
+```
+
+
+
+# Contributing
 Contributions are welcome! Please follow these steps to contribute:
 
 Fork the repository.
 Create a new branch for your feature or bug fix.
 Commit your changes and push your branch to your fork.
 Open a pull request with a detailed description of your changes.
+
 # License
 This project is licensed under the MIT License. See the LICENSE file for more information.
-
-
-### Additional Tips
-- **Consistent Formatting**: Ensure consistent use of headings, code blocks, and list formatting.
-- **Detailed API Information**: Include examples of requests and responses if applicable.
-- **Links to Related Resources**: Provide links to any related documentation or resources that might be helpful to the user.
-
-Feel free to adapt this template to fit the specific details and requirements of your project. 
+ 
