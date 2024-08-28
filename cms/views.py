@@ -95,6 +95,8 @@ def apiproductdetails(request, pk):
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
+
 @api_view(['GET'])
 def apidashCategory(request):
     category = ProductCategory.objects.all()

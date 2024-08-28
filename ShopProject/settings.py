@@ -163,6 +163,25 @@ DATABASES = {
 
 # }
 
+# DATABASES = {
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+
+#         'NAME': os.getenv('LOCAL_DATABASE_NAME'),
+
+#         'USER': os.getenv('LOCAL_DATABASE_USER'),
+
+#         'PASSWORD': os.getenv('LOCAL_DATABASE_PASSWORD'),
+
+#         'HOST': os.getenv('LOCAL_DATABASE_HOST'),
+
+#         'PORT': os.getenv('LOCAL_DATABASE_POST'),
+
+#     }
+
+# }
+
 
 """=====================================End of Product database configuration============================================== """
 
@@ -265,6 +284,7 @@ CORS_ALLOW_CREDENTIALS: True
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'http://localhost:3001',
     'https://madukaonline.co.ke',
     'https://base.madukaonline.co.ke'
     

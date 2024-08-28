@@ -1,14 +1,6 @@
 # MadukaShop Backend API Documentation
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Project Overview](#project-overview)
-3. [Installation](#installation)
-4. [Usage](#usage)
-    - [Start Django Server](#1-start-django-server)
-5. [API Endpoints](#api-endpoints)
-6. [Contributing](#contributing)
-7. [License](#license)
+
 
 ## Introduction
 This documentation provides an overview of the usage of the MadukaShop marketplace APIs.
@@ -505,6 +497,7 @@ POST /createnewsletter/ - creating a new newsletter
     'time_created': 'time the the letter is created'
 }
 ```
+
 
 
 
