@@ -11,8 +11,7 @@ const config = {
     apiUrl: "http://127.0.0.1:8000",
   },
   googleMaps: {
-    // apiKey: 'AIzaSyAFj9VA8r2rotB_TRqe0RNEBJGMvf3fkxQ',
-    apiKey: 'AIzaSyAwp---f_-ORxElgCjA3UKdKCIB_9fbD9Y',
+    apiKey: '',
   }
 };
 
